@@ -1,0 +1,56 @@
+
+###
+POST http://localhost:5000/user/register
+Content-Type: application/json
+
+{   "name":"Robinson Ngecu",
+    "email": "devngecu@gmail.com",
+    "phone_number":0707583092,
+    "password": "3W!W.:srzc4r^!P"
+}
+
+###
+POST http://localhost:5000/user/login
+Content-Type: application/json
+
+{
+    "email": "admin@gmail.com",
+    "password": "3W!W.:srzc4r^!P"
+}
+
+### 
+GET http://localhost:4400/user/check_user_details
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZV9pZCI6ImRmZTI4ZDA3LTJhM2EtNDdmNC05MDBjLWNmMzc2ZTE5OThkYiIsIm5hbWUiOiJEYW5pZWwgS2l0aGVrYSIsImVtYWlsIjoiZGFuQHlvcG1haWwuY29tIiwicm9sZSI6ImVtcGxveWVlIiwiaXNEZWxldGVkIjp0cnVlLCJpYXQiOjE3MDA3MzA4MTMsImV4cCI6MTcwMDgxNzIxM30.PAzH_8OVZD-MROpTZpA80hWWe9yUTE8g_e__vNqFH50
+
+
+###
+GET http://localhost:4400/user/allUsers
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZV9pZCI6ImRmZTI4ZDA3LTJhM2EtNDdmNC05MDBjLWNmMzc2ZTE5OThkYiIsIm5hbWUiOiJEYW5pZWwgS2l0aGVrYSIsImVtYWlsIjoiZGFuQHlvcG1haWwuY29tIiwicm9sZSI6ImVtcGxveWVlIiwiaXNEZWxldGVkIjp0cnVlLCJpYXQiOjE3MDA3MzA4MTMsImV4cCI6MTcwMDgxNzIxM30.PAzH_8OVZD-MROpTZpA80hWWe9yUTE8g_e__vNqFH50
+
+
+###
+GET http://localhost:4400/user/4098b7ca-4cd3-42f0-9504-78d94f59f162
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZV9pZCI6ImRmZTI4ZDA3LTJhM2EtNDdmNC05MDBjLWNmMzc2ZTE5OThkYiIsIm5hbWUiOiJEYW5pZWwgS2l0aGVrYSIsImVtYWlsIjoiZGFuQHlvcG1haWwuY29tIiwicm9sZSI6ImVtcGxveWVlIiwiaXNEZWxldGVkIjp0cnVlLCJpYXQiOjE3MDA3MzA4MTMsImV4cCI6MTcwMDgxNzIxM30.PAzH_8OVZD-MROpTZpA80hWWe9yUTE8g_e__vNqFH50
+
+
+###
+DELETE http://localhost:4400/user/4098b7ca-4cd3-42f0-9504-78d94f59f162
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZV9pZCI6ImRmZTI4ZDA3LTJhM2EtNDdmNC05MDBjLWNmMzc2ZTE5OThkYiIsIm5hbWUiOiJEYW5pZWwgS2l0aGVrYSIsImVtYWlsIjoiZGFuQHlvcG1haWwuY29tIiwicm9sZSI6ImVtcGxveWVlIiwiaXNEZWxldGVkIjp0cnVlLCJpYXQiOjE3MDA3MzA4MTMsImV4cCI6MTcwMDgxNzIxM30.PAzH_8OVZD-MROpTZpA80hWWe9yUTE8g_e__vNqFH50
+
+###
+POST http://localhost:4400/user/resetPassword
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZV9pZCI6ImRmZTI4ZDA3LTJhM2EtNDdmNC05MDBjLWNmMzc2ZTE5OThkYiIsIm5hbWUiOiJEYW5pZWwgS2l0aGVrYSIsImVtYWlsIjoiZGFuQHlvcG1haWwuY29tIiwicm9sZSI6ImVtcGxveWVlIiwiaXNEZWxldGVkIjp0cnVlLCJpYXQiOjE3MDA3MzA4MTMsImV4cCI6MTcwMDgxNzIxM30.PAzH_8OVZD-MROpTZpA80hWWe9yUTE8g_e__vNqFH50
+
+###
+PUT http://localhost:4400/user/4098b7ca-4cd3-42f0-9504-78d94f59f162
+Content-Type: application/json
+
+{
+    "email": "admin@gmail.com",
+    "password": "3W!W.:srzc4r^!P"
+}
