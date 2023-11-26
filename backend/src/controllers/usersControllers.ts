@@ -116,7 +116,7 @@ export const loginUser = async(req: Request, res: Response) => {
 
 export const deactivateUser = async (req: Request, res: Response) => {
     try {
-        const userId = req.params.userId; // Assuming you pass the user ID in the request parameters
+        const userId = req.params.userId; 
 
         const pool = await mssql.connect(sqlConfig);
 
