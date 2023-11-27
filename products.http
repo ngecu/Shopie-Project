@@ -2,11 +2,13 @@
 ###
 POST http://localhost:5000/product
 Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZGU4MWUwMzktZWIwNy00NWViLWIwYWMtNTgwMjJhOTYzOTkyIiwibmFtZSI6IlJvYmluc29uIE5nZWN1IiwiZW1haWwiOiJkZXZuZ2VjdUBnbWFpbC5jb20iLCJyb2xlIjowLCJ3ZWxjb21lZCI6MCwiYWN0aXZlIjoxLCJpYXQiOjE3MDEwNzkzMjB9.Mi0kfHWXtR8fYpsJ4Rc27cam84yImFtrvYMqNDunzf8
 
 {
     "name": "Sample name",
     "price": 200,
     "discount": 3,
+    "tags":"food,milk",
     "image": "/images/sample.jpg",
     "category_id": "e7157789-4b30-4a64-a1d7-0e1137423883",
     "countInStock": 10,
@@ -14,50 +16,16 @@ Content-Type: application/json
     "description": "Sample description"
 }
 
+###
+GET http://localhost:5000/product
+Content-Type: application/json
 
 
 ###
-POST http://localhost:5000/user/login
+GET http://localhost:5000/product/0e965010-9b41-4820-8b2b-0cdfffcc79c9
 Content-Type: application/json
-
-{
-    "email": "admin@gmail.com",
-    "password": "3W!W.:srzc4r^!P"
-}
-
-### 
-GET http://localhost:4400/user/check_user_details
-Content-Type: application/json
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZV9pZCI6ImRmZTI4ZDA3LTJhM2EtNDdmNC05MDBjLWNmMzc2ZTE5OThkYiIsIm5hbWUiOiJEYW5pZWwgS2l0aGVrYSIsImVtYWlsIjoiZGFuQHlvcG1haWwuY29tIiwicm9sZSI6ImVtcGxveWVlIiwiaXNEZWxldGVkIjp0cnVlLCJpYXQiOjE3MDA3MzA4MTMsImV4cCI6MTcwMDgxNzIxM30.PAzH_8OVZD-MROpTZpA80hWWe9yUTE8g_e__vNqFH50
-
 
 ###
-GET http://localhost:4400/user/allUsers
+DELETE http://localhost:5000/product/0e965010-9b41-4820-8b2b-0cdfffcc79c9
 Content-Type: application/json
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZV9pZCI6ImRmZTI4ZDA3LTJhM2EtNDdmNC05MDBjLWNmMzc2ZTE5OThkYiIsIm5hbWUiOiJEYW5pZWwgS2l0aGVrYSIsImVtYWlsIjoiZGFuQHlvcG1haWwuY29tIiwicm9sZSI6ImVtcGxveWVlIiwiaXNEZWxldGVkIjp0cnVlLCJpYXQiOjE3MDA3MzA4MTMsImV4cCI6MTcwMDgxNzIxM30.PAzH_8OVZD-MROpTZpA80hWWe9yUTE8g_e__vNqFH50
-
-
-###
-GET http://localhost:4400/user/4098b7ca-4cd3-42f0-9504-78d94f59f162
-Content-Type: application/json
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZV9pZCI6ImRmZTI4ZDA3LTJhM2EtNDdmNC05MDBjLWNmMzc2ZTE5OThkYiIsIm5hbWUiOiJEYW5pZWwgS2l0aGVrYSIsImVtYWlsIjoiZGFuQHlvcG1haWwuY29tIiwicm9sZSI6ImVtcGxveWVlIiwiaXNEZWxldGVkIjp0cnVlLCJpYXQiOjE3MDA3MzA4MTMsImV4cCI6MTcwMDgxNzIxM30.PAzH_8OVZD-MROpTZpA80hWWe9yUTE8g_e__vNqFH50
-
-
-###
-DELETE http://localhost:4400/user/4098b7ca-4cd3-42f0-9504-78d94f59f162
-Content-Type: application/json
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZV9pZCI6ImRmZTI4ZDA3LTJhM2EtNDdmNC05MDBjLWNmMzc2ZTE5OThkYiIsIm5hbWUiOiJEYW5pZWwgS2l0aGVrYSIsImVtYWlsIjoiZGFuQHlvcG1haWwuY29tIiwicm9sZSI6ImVtcGxveWVlIiwiaXNEZWxldGVkIjp0cnVlLCJpYXQiOjE3MDA3MzA4MTMsImV4cCI6MTcwMDgxNzIxM30.PAzH_8OVZD-MROpTZpA80hWWe9yUTE8g_e__vNqFH50
-
-###
-POST http://localhost:4400/user/resetPassword
-Content-Type: application/json
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZV9pZCI6ImRmZTI4ZDA3LTJhM2EtNDdmNC05MDBjLWNmMzc2ZTE5OThkYiIsIm5hbWUiOiJEYW5pZWwgS2l0aGVrYSIsImVtYWlsIjoiZGFuQHlvcG1haWwuY29tIiwicm9sZSI6ImVtcGxveWVlIiwiaXNEZWxldGVkIjp0cnVlLCJpYXQiOjE3MDA3MzA4MTMsImV4cCI6MTcwMDgxNzIxM30.PAzH_8OVZD-MROpTZpA80hWWe9yUTE8g_e__vNqFH50
-
-###
-PUT http://localhost:4400/user/4098b7ca-4cd3-42f0-9504-78d94f59f162
-Content-Type: application/json
-
-{
-    "email": "admin@gmail.com",
-    "password": "3W!W.:srzc4r^!P"
-}
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZGU4MWUwMzktZWIwNy00NWViLWIwYWMtNTgwMjJhOTYzOTkyIiwibmFtZSI6IlJvYmluc29uIE5nZWN1IiwiZW1haWwiOiJkZXZuZ2VjdUBnbWFpbC5jb20iLCJyb2xlIjowLCJ3ZWxjb21lZCI6MCwiYWN0aXZlIjoxLCJpYXQiOjE3MDEwNzkzMjB9.Mi0kfHWXtR8fYpsJ4Rc27cam84yImFtrvYMqNDunzf8

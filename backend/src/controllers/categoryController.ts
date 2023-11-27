@@ -5,14 +5,18 @@ import {v4} from 'uuid'
 
 export const createCategory = async (req: Request, res: Response) => {
     try {
-        const {category_name,category_description} = req.body
+        const {category_name,category_description,category_image} = req.body
         const category_id = v4();
+        console.log(req.body);
+        
       const pool = await mssql.connect(sqlConfig);
       const result = await pool.request()
         .input('category_id', mssql.VarChar, category_id)
         .input('category_name', mssql.VarChar, category_name)
         .input('category_description', mssql.VarChar, category_description)
+        .input('category_image', mssql.VarChar, category_image)
 
+        
         .execute('InsertCategory');
   
       const createdCategory = result.recordset[0];
