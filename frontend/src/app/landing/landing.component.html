@@ -1,0 +1,277 @@
+<app-navbar></app-navbar>
+
+
+<section style="position: relative; background: url('https://muthaigatravel.com/wp-content/uploads/2021/10/Flying-Bush-and-Beach-Offers-by-muthaiga-travel.jpg') center/cover no-repeat; height: 400px;">
+  
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); display: flex; align-items: center; padding: 20px;">
+    <div class="container m-2 w-[80vw] block mx-auto justify-center items-center">
+    <div style="max-width: 600px; color: white;">
+      <h2 style="font-size: 2em; margin-bottom: 10px;">Xplora Tours and Travels</h2>
+      <p style="font-size: 1.2em;">Discover the Extraordinary with Xplora Tours and Travels</p>
+    </div>
+  </div>
+  </div>
+</section>
+
+
+
+  <div class="container m-2 w-[80vw] block mx-auto justify-center items-center">
+
+
+
+
+
+    <section class="mt-8">
+      <img src="https://muthaigatravel.com/wp-content/uploads/2021/10/header.png" style="width:100%" alt="">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-3xl mb-4">Featured Tours</h2>
+        <!-- <a routerLink="/tours" class="text-blue-500 hover:underline">See More</a> -->
+      </div>
+    
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div *ngFor="let tour of events" class="relative block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 mb-4">
+          <div style="position: relative; background: url({{tour.image}}) center/cover no-repeat; height: 200px;">
+            
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); display: flex; align-items: center; padding: 20px;">
+
+              <a routerLink="tour/{{tour.event_id}}" class="text-white">{{ tour.event_name }}</a> - 
+              <br/>
+
+            <span
+                [ngClass]="{
+                  'bg-green-100 text-success-700': tour.status === 'Ongoing',
+                  'bg-red-100 text-danger-700': tour.status === 'Past',
+                  'bg-yellow-100 text-warning-700': tour.status === 'Upcoming'
+                }"
+                class="inline-block whitespace-nowrap rounded-[0.27rem] px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none"
+              >
+                {{ tour.status }}
+              </span>
+
+              {{ tour.destination }}
+</div>
+
+          </div>
+          
+          <!-- <img [ngClass]="{ 'dark-overlay': isDarkOverlay, 'hover-scale': isHovered }" (mouseover)="isHovered = true" (mouseout)="isHovered = false" class="rounded-lg transition-transform transform hover:scale-105 dark:overlay" [src]="tour.image" alt="Tour Image" />
+          
+          <div class="absolute top-0 p-6">
+            <h5 class="mb-2 text-xl font-medium leading-tight text-white">
+              <a routerLink="tour/{{tour.event_id}}" class="text-white">{{ tour.event_name }}</a>
+              <span
+                [ngClass]="{
+                  'bg-green-100 text-success-700': tour.status === 'Ongoing',
+                  'bg-red-100 text-danger-700': tour.status === 'Past',
+                  'bg-yellow-100 text-warning-700': tour.status === 'Upcoming'
+                }"
+                class="inline-block whitespace-nowrap rounded-[0.27rem] px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none"
+              >
+                {{ tour.status }}
+              </span>
+            </h5>
+        
+            <p class="mb-4 text-base text-white">{{ tour.destination }} {{ tour.duration }} Day(s) {{ tour.price }} Ksh</p>
+            
+            <p class="text-base text-white">
+              {{ truncateText(tour.description, 150) }}
+              <small class="text-white">Last updated 3 mins ago</small>
+            </p>
+          </div> -->
+        </div>
+        
+        
+        
+      </div>
+    </section>
+
+    <section *ngFor="let category of categories" class="mt-8">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-3xl mb-4">{{category.category_name}}</h2>
+        <!-- <a routerLink="/category/:category.category_id" class="text-blue-500 hover:underline">See More</a> -->
+      </div>
+    
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div *ngFor="let tour of category.tours" class="bg-white rounded-md overflow-hidden shadow-md mb-4">
+          <img [src]="tour.image" alt="Tour Image" class="w-full h-48 object-cover mb-4">
+        
+          <div class="p-4">
+            <h3 class="text-xl font-semibold mb-2">
+            <a routerLink="tour/{{tour.event_id}}">
+              
+              {{tour.destination}}
+            </a>
+            </h3>
+            <p class="text-gray-600 mb-4">{{ truncateText(tour.description, 150) }}</p>
+            <p class="text-sm text-gray-500">
+              {{tour.duration}} Day(s) {{tour.price}} Ksh
+            </p>
+          </div>
+        
+          <div [ngClass]="{
+                'bg-green-500': tour.status === 'Ongoing',
+                'bg-red-500': tour.status === 'Past',
+                'bg-yellow-500': tour.status === 'Upcoming'
+              }" 
+              class="py-2 px-4 flex justify-between items-center">
+            <span class="text-white font-bold">
+              {{tour.status}}
+            </span>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+    
+
+    
+
+
+
+
+
+    <!-- <section class="bg-blue-500 text-white text-center p-8 rounded-lg mt-8">
+      <h2 class="text-2xl font-bold mb-4">Ready to embark on your journey?</h2>
+      <p class="text-lg">Book your adventure now!</p>
+      <button class="bg-white text-blue-500 px-4 py-2 mt-4 rounded-md"><a [routerLink]="['/register']">Book Now</a></button>
+    </section> -->
+
+
+    <section class="text-neutral-700 dark:text-neutral-300">
+      <div class="mx-auto text-center md:max-w-xl lg:max-w-3xl">
+        <h3 class="mb-6 text-3xl font-bold">Testimonials</h3>
+        <p class="mb-6 pb-2 md:mb-12 md:pb-0">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit,
+          error amet numquam iure provident voluptate esse quasi, veritatis
+          totam voluptas nostrum quisquam eum porro a pariatur veniam.
+        </p>
+      </div>
+    
+      <!--First Testimonial-->
+      <div class="grid gap-6 text-center md:grid-cols-3">
+        <div>
+          <div
+            class="block rounded-lg bg-white shadow-lg dark:bg-neutral-700 dark:shadow-black/30">
+            <div class="h-28 overflow-hidden rounded-t-lg bg-[#9d789b]"></div>
+            <div
+              class="mx-auto -mt-12 w-24 overflow-hidden rounded-full border-2 border-white bg-white dark:border-neutral-800 dark:bg-neutral-800">
+              <img
+                src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp" />
+            </div>
+            <div class="p-6">
+              <h4 class="mb-4 text-2xl font-semibold">Maria Smantha</h4>
+              <hr />
+              <p class="mt-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  class="inline-block h-7 w-7 pr-2"
+                  viewBox="0 0 24 24">
+                  <path
+                    d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
+                </svg>
+                Lorem ipsum dolor sit amet eos adipisci, consectetur
+                adipisicing elit.
+              </p>
+            </div>
+          </div>
+        </div>
+    
+        <!--Second Testimonial-->
+        <div>
+          <div
+            class="block rounded-lg bg-white shadow-lg dark:bg-neutral-700 dark:shadow-black/30">
+            <div class="h-28 overflow-hidden rounded-t-lg bg-[#7a81a8]"></div>
+            <div
+              class="mx-auto -mt-12 w-24 overflow-hidden rounded-full border-2 border-white bg-white dark:border-neutral-800 dark:bg-neutral-800">
+              <img
+                src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp" />
+            </div>
+            <div class="p-6">
+              <h4 class="mb-4 text-2xl font-semibold">Lisa Cudrow</h4>
+              <hr />
+              <p class="mt-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  class="inline-block h-7 w-7 pr-2"
+                  viewBox="0 0 24 24">
+                  <path
+                    d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
+                </svg>
+                Neque cupiditate assumenda in maiores repudi mollitia
+                architecto.
+              </p>
+            </div>
+          </div>
+        </div>
+    
+        <!--Third Testimonial-->
+        <div>
+          <div
+            class="block rounded-lg bg-white shadow-lg dark:bg-neutral-700 dark:shadow-black/30">
+            <div class="h-28 overflow-hidden rounded-t-lg bg-[#6d5b98]"></div>
+            <div
+              class="mx-auto -mt-12 w-24 overflow-hidden rounded-full border-2 border-white bg-white dark:border-neutral-800 dark:bg-neutral-800">
+              <img
+                src="https://tecdn.b-cdn.net/img/Photos/Avatars/img%20(9).webp" />
+            </div>
+            <div class="p-6">
+              <h4 class="mb-4 text-2xl font-semibold">John Smith</h4>
+              <hr />
+              <p class="mt-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  class="inline-block h-7 w-7 pr-2"
+                  viewBox="0 0 24 24">
+                  <path
+                    d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z" />
+                </svg>
+                Delectus impedit saepe officiis ab aliquam repellat rem unde
+                ducimus.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="partners-section py-12">
+      <div class="container mx-auto">
+        <h2 class="text-3xl font-semibold mb-8 text-center">Our Partners</h2>
+    
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <!-- Partner 1 -->
+          <div class="partner-item">
+            <img src="https://tembeatujengekenya.com/wp-content/uploads/2022/04/ISUZU_2_150x84.jpg" alt="Partner 1 Logo" class="w-full h-16 object-contain mb-4">
+
+          </div>
+    
+          <!-- Partner 2 -->
+          <div class="partner-item">
+            <img src="https://tembeatujengekenya.com/wp-content/uploads/2022/04/saf_236__50op2_150x84.png" alt="Partner 2 Logo" class="w-full h-16 object-contain mb-4">
+          </div>
+
+          <div class="partner-item">
+            <img src="https://tembeatujengekenya.com/wp-content/uploads/2022/04/tourism-fund-partner-logo_150x84.jpeg" alt="Partner 2 Logo" class="w-full h-16 object-contain mb-4">
+          </div>
+
+          <div class="partner-item">
+            <img src="https://tembeatujengekenya.com/wp-content/uploads/2022/04/Sarova-Hotels-Resorts-Logo_30.png" alt="Partner 2 Logo" class="w-full h-16 object-contain mb-4">
+          </div>
+
+
+          
+    
+          <!-- Add more partner items as needed -->
+    
+        </div>
+      </div>
+    </section>
+
+    
+  </div>
+
+
+
+<app-footer></app-footer>

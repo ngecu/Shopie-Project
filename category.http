@@ -5,7 +5,10 @@ Content-Type: application/json
 
 {
     "category_name": "Milk 2",
-    "category_description": "Milk is good for the sol"
+    "category_image": "Milk is good for the sol",
+    "category_description": "Milk is good for the sol",
+    
+
 
     
 }

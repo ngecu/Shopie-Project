@@ -1,36 +1,56 @@
 import { sqlConfig } from '../config/sqlConfig'
 import { Request, Response } from 'express'
 import mssql from 'mssql'
+import {v4} from'uuid';
 
 export const addOrderItems = async (req: Request, res: Response) => {
     try {
       const {
-        orderItems,
-        shippingAddress,
-        paymentMethod,
-        itemsPrice,
-        taxPrice,
-        shippingPrice,
-        totalPrice,
+        product_id,
         user_id,
-      } = req.body;
+        shipping_address,
+        first_name,
+        last_name,
+        phone_number,
+        email_address,
+        payment_method,
+        payment_result_id,
+        payment_result_status,
+        payment_result_update_time,
+        payment_result_email_address,
+        tax_price,
+   
+        total_price,
+        is_paid,
+        paid_at
+    } = req.body;
+    
   
-      if (!orderItems || orderItems.length === 0) {
-        res.status(400).json({ error: 'No order items' });
-        return;
-      }
   
       const pool = await mssql.connect(sqlConfig);
-  
+      const order_id = v4()
       const result = await pool.request()
+      .input('product_id', mssql.VarChar, product_id)
+      .input('order_id', mssql.VarChar, order_id)
         .input('user_id', mssql.VarChar, user_id)
-        .input('orderItems', mssql.NVarChar, JSON.stringify(orderItems))
-        .input('shippingAddress', mssql.NVarChar, JSON.stringify(shippingAddress))
-        .input('paymentMethod', mssql.VarChar, paymentMethod)
-        .input('itemsPrice', mssql.Decimal, itemsPrice)
-        .input('taxPrice', mssql.Decimal, taxPrice)
-        .input('shippingPrice', mssql.Decimal, shippingPrice)
-        .input('totalPrice', mssql.Decimal, totalPrice)
+        .input('shipping_address', mssql.NVarChar, shipping_address)
+        .input('paymentMethod', mssql.VarChar, payment_method)
+        .input('first_name', mssql.VarChar, first_name)
+        .input('last_name', mssql.VarChar, last_name)
+        .input('phone_number', mssql.VarChar, phone_number)
+        .input('email_address', mssql.VarChar, email_address
+        .input('email_address', mssql.VarChar, email_address)
+        .input('payment_result_id', mssql.VarChar, payment_result_id)
+        .input('payment_result_status', mssql.VarChar, payment_result_status)
+        .input('payment_result_update_time', mssql.VarChar, payment_result_update_time)
+        .input('payment_result_email_address', mssql.VarChar, payment_result_email_address)
+        .input('tax_price', mssql.VarChar, tax_price)
+        .input('total_price', mssql.VarChar, total_price)
+        .input('is_paid', mssql.VarChar, is_paid)
+        .input('paid_at', mssql.VarChar, paid_at)
+
+        
+        )
         .execute('AddOrder');
   
       const createdOrder = result.recordset[0];
