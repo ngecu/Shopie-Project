@@ -3,9 +3,9 @@ import express, { json } from "express";
 import cors from 'cors'
 import user_router from "./routes/userRoutes";
 import category_router from "./routes/categoryRoutes";
-import event_router from "./routes/eventRoutes";
-import bookingRouter from "./routes/bookingRoutes";
-import reviewRouter from "./routes/reviewRoutes";
+import product_router from "./routes/productRoutes";
+import order_router from "./routes/orderRoutes";
+
 const app = express();
 
 app.use(cors())
@@ -15,12 +15,14 @@ app.use(json())
 //   console.log("api is working");
 // });
 
+// const __dirname = path.resolve()
+// app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 app.use('/user', user_router)
+app.use('/product', product_router)
+app.use('/order', order_router)
 app.use('/category', category_router)
-app.use('/events', event_router)
-app.use('/booking', bookingRouter)
-app.use('/review', reviewRouter)
+
 
 
 
