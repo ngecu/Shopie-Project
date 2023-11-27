@@ -66,19 +66,17 @@ export const deleteProduct = async (req: Request, res: Response) => {
 
 export  const createProduct = async (req: Request, res: Response) => {
     try {
+      const {name,price,discount,image,category_id,countInStock,numReviews,description} = req.body
       const pool = await mssql.connect(sqlConfig);
       const result = await pool.request()
-        .input('name', mssql.VarChar, 'Sample name')
-        .input('price', mssql.Decimal, 0)
-        .input('discount', mssql.Int, Math.floor(Math.random() * (10 - 1 + 1)) + 1)
-        .input('user_id', mssql.VarChar, req.user._id)
-        .input('image', mssql.VarChar, '/images/sample.jpg')
-        .input('brand', mssql.VarChar, 'Sample brand')
-        .input('category_id', mssql.VarChar, '648a3c1059b8f5eb381f29f0')
-        .input('branding', mssql.VarChar, 'Sample Branding')
-        .input('countInStock', mssql.Int, 0)
-        .input('numReviews', mssql.Int, 0)
-        .input('description', mssql.Text, 'Sample description')
+        .input('name', mssql.VarChar, name)
+        .input('price', mssql.Decimal, price)
+        .input('discount', mssql.Int, discount)
+        .input('image', mssql.VarChar, image)
+        .input('category_id', mssql.VarChar, category_id)
+        .input('countInStock', mssql.Int,countInStock)
+        .input('numReviews', mssql.Int, numReviews)
+        .input('description', mssql.Text, description)
         .execute('usp_InsertProduct');
   
       const createdProduct = result.recordset[0];
@@ -133,7 +131,7 @@ export  const createProductReview = async (req: Request, res: Response) => {
   
       const alreadyReviewedResult = await pool.request()
         .input('product_id', mssql.VarChar, req.params.id)
-        .input('user_id', mssql.VarChar, req.user._id)
+        // .input('user_id', mssql.VarChar, req.user._id)
         .query('SELECT * FROM product_reviews WHERE product_id = @product_id AND user_id = @user_id');
   
       const alreadyReviewed = alreadyReviewedResult.recordset[0];
@@ -145,8 +143,8 @@ export  const createProductReview = async (req: Request, res: Response) => {
 
       const addReviewResult = await pool.request()
         .input('product_id', mssql.VarChar, req.params.id)
-        .input('user_id', mssql.VarChar, req.user._id)
-        .input('name', mssql.VarChar, req.user.name)
+        // .input('user_id', mssql.VarChar, req.user._id)
+        // .input('name', mssql.VarChar, req.user.name)
         .input('rating', mssql.Int, Number(rating))
         .input('comment', mssql.VarChar, comment)
         .execute('usp_AddProductReview');

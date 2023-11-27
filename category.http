@@ -1,0 +1,11 @@
+
+###
+POST http://localhost:5000/category
+Content-Type: application/json
+
+{
+    "category_name": "Milk 2",
+    "category_description": "Milk is good for the sol"
+
+    
+}

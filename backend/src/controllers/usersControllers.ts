@@ -13,10 +13,10 @@ export const dbhelper = new Connection
  
 export const registerUser = async (req:Request, res:Response) => {
     try {
-        const { name, email, phone_number, password } = req.body;
+        const { name, email, password } = req.body;
 
         
-        if (!name || !email || !phone_number || !password) {
+        if (!name || !email  || !password) {
             return res.status(400).json({
                 message: 'Please provide all required fields: name, email, phone_number, password',
             });
@@ -24,16 +24,12 @@ export const registerUser = async (req:Request, res:Response) => {
 
         const user_id = v4();
         const hashedPwd = await bcrypt.hash(password, 10);
-
         const pool = await mssql.connect(sqlConfig);
 
         const emailTaken = await pool.request()
             .input('email', mssql.VarChar, email)
             .query('SELECT * FROM users WHERE email = @email');
 
-        const phoneTaken = await pool.request()
-            .input('phone_number', mssql.VarChar, phone_number)
-            .query('SELECT * FROM users WHERE phone_number = @phone_number');
 
         if (emailTaken.recordset.length > 0) {
             return res.status(400).json({
@@ -41,21 +37,14 @@ export const registerUser = async (req:Request, res:Response) => {
             });
         }
 
-        if (phoneTaken.recordset.length > 0) {
-            return res.status(400).json({
-                message: 'This phone number is already in use',
-            });
-        }
-
 
         const result = await pool.request()
-            .input('user_id', mssql.VarChar, user_id)
-            .input('name', mssql.VarChar, name)
-            .input('email', mssql.VarChar, email)
-            .input('phone_number', mssql.VarChar, phone_number)
-            .input('password', mssql.VarChar, hashedPwd)
-            .query('INSERT INTO users (user_id, name, email, phone_number, password) VALUES (@user_id, @name, @email, @phone_number, @password)');
-
+        .input('user_id', mssql.VarChar, user_id)
+        .input('name', mssql.VarChar, name)
+        .input('email', mssql.VarChar, email)
+        .input('password', mssql.VarChar, hashedPwd)
+        .execute('InsertUser');
+        
         return res.status(201).json({
             message: 'User registered successfully',
         });
@@ -78,7 +67,7 @@ export const loginUser = async(req: Request, res: Response) => {
 
         if (user[0]?.email == email) {
             const CorrectPwd = await bcrypt.compare(password, user[0]?.password);
-
+            // const CorrectPwd = true;
             if (!CorrectPwd) {
                 return res.status(401).json({
                     error: "Incorrect password"
@@ -113,106 +102,44 @@ export const loginUser = async(req: Request, res: Response) => {
     }
 };
 
-
-export const deactivateUser = async (req: Request, res: Response) => {
-    try {
-        const userId = req.params.userId; // Assuming you pass the user ID in the request parameters
-
-        const pool = await mssql.connect(sqlConfig);
-
-        const result = await pool.request()
-            .input("userId", userId)
-            .execute('deactivateUser'); // Assuming you have a stored procedure to deactivate a user
-
-        if (result.rowsAffected[0] > 0) {
-            return res.status(200).json({
-                message: "User deactivated successfully"
-            });
-        } else {
-            return res.status(404).json({
-                error: "User not found"
-            });
-        }
-    } catch (error) {
-        return res.status(500).json({
-            error: error.message
-        });
-    }
-};
-
-
-export const activateUser = async (req: Request, res: Response) => {
-    try {
-        const userId = req.params.userId; // Assuming you pass the user ID in the request parameters
-
-        const pool = await mssql.connect(sqlConfig);
-
-        const result = await pool.request()
-            .input("userId", userId)
-            .execute('activateUser'); // Assuming you have a stored procedure to activate a user
-
-        if (result.rowsAffected[0] > 0) {
-            return res.status(200).json({
-                message: "User activated successfully"
-            });
-        } else {
-            return res.status(404).json({
-                error: "User not found"
-            });
-        }
-    } catch (error) {
-        return res.status(500).json({
-            error: error.message
-        });
-    }
-};
-
-
-
-
-export const manageProfile = async (req: Request, res: Response) => {
-    try {
-        const { new_password, email } = req.body;
-        console.log(req.body);
+// export const manageProfile = async (req: Request, res: Response) => {
+//     try {
+//         const { new_password, email } = req.body;
+//         console.log(req.body);
         
     
-        // Check if the email exists in the database
-        const emailExists = (await dbhelper.query(`SELECT * FROM users WHERE email = '${email}'`)).recordset;
+//         // Check if the email exists in the database
+//         const emailExists = (await dbhelper.query(`SELECT * FROM users WHERE email = '${email}'`)).recordset;
 
-        if (!emailExists || emailExists.length === 0) {
-            return res.status(404).json({ error: "Email not found" });
-        }
+//         if (!emailExists || emailExists.length === 0) {
+//             return res.status(404).json({ error: "Email not found" });
+//         }
 
  
 
-        // Hash the new password
-        const hashedNewPassword = await bcrypt.hash(new_password, 10);
+//         // Hash the new password
+//         // const hashedNewPassword = await bcrypt.hash(new_password, 10);
+//         const hashedNewPassword = true;
 
-        // Update the user's password in the database
-        await dbhelper.execute('manageProfile', {
-            new_password: hashedNewPassword,
-            user_id: emailExists[0].user_id,
-        });
+//         // Update the user's password in the database
+//         await dbhelper.execute('manageProfile', {
+//             new_password: hashedNewPassword,
+//             user_id: emailExists[0].user_id,
+//         });
 
-        return res.status(200).json({
-            message: 'Password reset successfully'
-        });
+//         return res.status(200).json({
+//             message: 'Password reset successfully'
+//         });
 
-    } catch (error) {
-        console.log(error);
+//     } catch (error) {
+//         console.log(error);
         
-        return res.status(500).json({
-            error: error.message
-        });
-    }
-};
+//         return res.status(500).json({
+//             error: error.message
+//         });
+//     }
+// };
 
-
-
-
-async function sendPasswordChangeAttemptEmail(email: string) {
-    console.log(`Email sent to ${email}: Password change attempt detected.`);
-}
 
 export const checkUserDetails = async (req:ExtendedUser, res:Response)=>{
     
@@ -290,7 +217,7 @@ export const deleteUser = async (req: ExtendedUser, res: Response) => {
       return res.status(200).json({message:"Deleted Successfully"}); // Successful deletion, no content response
     } catch (error) {
       return res.status(500).json({
-        error: error.message || 'Internal Server Error',
+        error: error  || 'Internal Server Error',
       });
     }
   };
