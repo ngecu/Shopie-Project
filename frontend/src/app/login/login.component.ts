@@ -12,7 +12,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent {
   loginForm!:FormGroup
-  
+  registrationForm!:FormGroup
+
   constructor (private fb:FormBuilder ,private router: Router, ){
     this.loginForm = this.fb.group({
       email: ['',[Validators.required]],
@@ -22,9 +23,16 @@ export class LoginComponent {
     
   }
 
+  async createUser(){
+    
+    
+  }
+
   errorMessage:string = ''
   email:string = ''
   name:string = ''
+  error:boolean = false;
+  success:boolean = false;
 
 
   successMessage:string = ''

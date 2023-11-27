@@ -12,6 +12,17 @@ import { FooterComponent } from './footer/footer.component';
 import { SearchpageComponent } from './searchpage/searchpage.component';
 import { CategoryComponent } from './category/category.component';
 import { ProductComponent } from './product/product.component';
+import { BasketComponent } from './basket/basket.component';
+import { AdminComponent } from './admin/admin.component';
+import { MyaccountComponent } from './myaccount/myaccount.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { MyordersComponent } from './myorders/myorders.component';
+import { EditaccountComponent } from './editaccount/editaccount.component';
+import { UsersComponent } from './users/users.component';
+import { ProductsComponent } from './products/products.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { OrdersComponent } from './orders/orders.component';
+import { LostPasswordComponent } from './lost-password/lost-password.component';
 
 
 @NgModule({
@@ -25,6 +36,17 @@ import { ProductComponent } from './product/product.component';
     SearchpageComponent,
     CategoryComponent,
     ProductComponent,
+    BasketComponent,
+    AdminComponent,
+    MyaccountComponent,
+    SidebarComponent,
+    MyordersComponent,
+    EditaccountComponent,
+    UsersComponent,
+    ProductsComponent,
+    CategoriesComponent,
+    OrdersComponent,
+    LostPasswordComponent,
   ],
   imports: [
     AppRoutingModule,
