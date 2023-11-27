@@ -3,6 +3,34 @@ import { Request, Response } from 'express'
 import mssql from 'mssql'
 import {v4} from 'uuid'
 
+export  const createProduct = async (req: Request, res: Response) => {
+    try {
+      const product_id = v4();
+      const {name,price,discount,image,category_id,countInStock,numReviews,description,tags} = req.body
+      const pool = await mssql.connect(sqlConfig);
+      const result = await pool.request()
+      .input('product_id', mssql.VarChar, product_id)
+        .input('name', mssql.VarChar, name)
+        .input('price', mssql.Decimal, price)
+        .input('discount', mssql.Int, discount)
+        .input('image', mssql.VarChar, image)
+      .input('tags', mssql.VarChar, tags)
+
+        .input('category_id', mssql.VarChar, category_id)
+        .input('countInStock', mssql.Int,countInStock)
+        .input('numReviews', mssql.Int, numReviews)
+        .input('description', mssql.Text, description)
+        .execute('InsertProduct');
+  
+      const createdProduct = result.recordset[0];
+      res.status(201).json(createdProduct);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
+
+
 export const getProducts = async (req: Request, res: Response) => {
     try {
       const pageSize = 10;
@@ -35,8 +63,9 @@ export const getProducts = async (req: Request, res: Response) => {
   
 export const getProductById = async (req: Request, res: Response) => {
     try {
+      const {product_id} = req.params
       const pool = await mssql.connect(sqlConfig);
-      const result = await pool.request().input('product_id', mssql.VarChar, req.params.id).query('SELECT * FROM products WHERE product_id = @product_id');
+      const result = await pool.request().input('product_id', mssql.VarChar,product_id ).query('SELECT * FROM products WHERE product_id = @product_id');
   
       if (result.recordset.length > 0) {
         res.json(result.recordset[0]);
@@ -51,8 +80,12 @@ export const getProductById = async (req: Request, res: Response) => {
 
 export const deleteProduct = async (req: Request, res: Response) => {
     try {
+      const {product_id} = req.params
+
+      console.log(req.params);
+      
       const pool = await mssql.connect(sqlConfig);
-      const result = await pool.request().input('product_id', mssql.VarChar, req.params.id).execute('usp_DeleteProduct');
+      const result = await pool.request().input('product_id', mssql.VarChar, product_id).execute('DeleteProduct');
   
       if (result?.rowsAffected.length > 0) {
         res.json({ message: 'Product removed' });
@@ -65,35 +98,11 @@ export const deleteProduct = async (req: Request, res: Response) => {
     }
   };
 
-export  const createProduct = async (req: Request, res: Response) => {
-    try {
-      const product_id = v4();
-      const {name,price,discount,image,category_id,countInStock,numReviews,description} = req.body
-      const pool = await mssql.connect(sqlConfig);
-      const result = await pool.request()
-      .input('product_id', mssql.VarChar, product_id)
-        .input('name', mssql.VarChar, name)
-        .input('price', mssql.Decimal, price)
-        .input('discount', mssql.Int, discount)
-        .input('image', mssql.VarChar, image)
-        .input('category_id', mssql.VarChar, category_id)
-        .input('countInStock', mssql.Int,countInStock)
-        .input('numReviews', mssql.Int, numReviews)
-        .input('description', mssql.Text, description)
-        .execute('InsertProduct');
-  
-      const createdProduct = result.recordset[0];
-      res.status(201).json(createdProduct);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  };
 
 
 export const updateProduct = async (req: Request, res: Response) => {
     try {
-      const product_id = req.params.id
+      const {product_id} = req.params
       const {name,image,category,description,discount,price,countInStock} = req.body
       const pool = await mssql.connect(sqlConfig);
       const result = await pool.request()

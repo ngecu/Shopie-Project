@@ -1,3 +1,7 @@
+USE SHOPIFY
+SELECT * FROM USERS
+drop TABLE users
+
 CREATE TABLE users (
     user_id VARCHAR(500) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,

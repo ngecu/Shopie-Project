@@ -10,25 +10,11 @@ BEGIN
 END;
 
 
-CREATE PROCEDURE LoginUser
-    @email VARCHAR(100),
-    @password VARCHAR(100)
+
+CREATE OR ALTER PROCEDURE loginUser(@email VARCHAR(200), @password VARCHAR(200))
 AS
 BEGIN
-    DECLARE @userId INT;
 
-    SELECT @userId = user_id
-    FROM users
-    WHERE email = @email AND password = @password AND active = 1;
+    SELECT * FROM users WHERE email= @email
 
-    IF @userId IS NOT NULL
-    BEGIN
-        SELECT user_id, name, email, phone_number
-        FROM users
-        WHERE user_id = @userId;
-    END
-    ELSE
-    BEGIN
-        SELECT NULL AS user_id, NULL AS name, NULL AS email, NULL AS phone_number;
-    END
-END;
+END
