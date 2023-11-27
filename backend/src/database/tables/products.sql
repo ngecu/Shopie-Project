@@ -1,3 +1,4 @@
+
 CREATE TABLE products (
     product_id VARCHAR(255) PRIMARY KEY AUTO_INCREMENT,
     user_id VARCHAR(255) NOT NULL,
