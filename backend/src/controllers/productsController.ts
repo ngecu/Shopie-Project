@@ -1,6 +1,7 @@
 import { sqlConfig } from '../config/sqlConfig'
 import { Request, Response } from 'express'
 import mssql from 'mssql'
+import {v4} from 'uuid'
 
 export const getProducts = async (req: Request, res: Response) => {
     try {
@@ -53,7 +54,7 @@ export const deleteProduct = async (req: Request, res: Response) => {
       const pool = await mssql.connect(sqlConfig);
       const result = await pool.request().input('product_id', mssql.VarChar, req.params.id).execute('usp_DeleteProduct');
   
-      if (result.rowsAffected > 0) {
+      if (result?.rowsAffected.length > 0) {
         res.json({ message: 'Product removed' });
       } else {
         res.status(404).json({ error: 'Product not found' });
@@ -66,9 +67,11 @@ export const deleteProduct = async (req: Request, res: Response) => {
 
 export  const createProduct = async (req: Request, res: Response) => {
     try {
+      const product_id = v4();
       const {name,price,discount,image,category_id,countInStock,numReviews,description} = req.body
       const pool = await mssql.connect(sqlConfig);
       const result = await pool.request()
+      .input('product_id', mssql.VarChar, product_id)
         .input('name', mssql.VarChar, name)
         .input('price', mssql.Decimal, price)
         .input('discount', mssql.Int, discount)
@@ -77,7 +80,7 @@ export  const createProduct = async (req: Request, res: Response) => {
         .input('countInStock', mssql.Int,countInStock)
         .input('numReviews', mssql.Int, numReviews)
         .input('description', mssql.Text, description)
-        .execute('usp_InsertProduct');
+        .execute('InsertProduct');
   
       const createdProduct = result.recordset[0];
       res.status(201).json(createdProduct);
@@ -90,18 +93,19 @@ export  const createProduct = async (req: Request, res: Response) => {
 
 export const updateProduct = async (req: Request, res: Response) => {
     try {
+      const product_id = req.params.id
+      const {name,image,category,description,discount,price,countInStock} = req.body
       const pool = await mssql.connect(sqlConfig);
       const result = await pool.request()
-        .input('product_id', mssql.VarChar, req.params.id)
-        .input('name', mssql.VarChar, req.body.name)
-        .input('image', mssql.VarChar, req.body.image)
-        .input('category_id', mssql.VarChar, req.body.category)
-        .input('branding', mssql.VarChar, req.body.branding)
-        .input('description', mssql.Text, req.body.description)
-        .input('discount', mssql.Int, req.body.discount)
-        .input('price', mssql.Decimal, req.body.price)
-        .input('countInStock', mssql.Int, req.body.countInStock)
-        .execute('usp_UpdateProduct');
+        .input('product_id', mssql.VarChar,product_id )
+        .input('name', mssql.VarChar, name)
+        .input('image', mssql.VarChar, image)
+        .input('category_id', mssql.VarChar, category)
+        .input('description', mssql.Text, description)
+        .input('discount', mssql.Int, discount)
+        .input('price', mssql.Decimal, price)
+        .input('countInStock', mssql.Int, countInStock)
+        .execute('UpdateProduct');
   
       const updatedProduct = result.recordset[0];
       res.json(updatedProduct);

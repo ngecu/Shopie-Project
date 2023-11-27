@@ -1,13 +1,12 @@
-CREATE PROCEDURE InsertUser
+CREATE OR ALTER PROCEDURE InsertUser
     @user_id VARCHAR(50),
     @name VARCHAR(100),
     @email VARCHAR(100),
-    @phone_number VARCHAR(20),
     @password VARCHAR(100)
 AS
 BEGIN
-    INSERT INTO users (user_id, name, email, phone_number, password)
-    VALUES (@user_id, @name, @email, @phone_number, @password);
+    INSERT INTO users (user_id, name, email,  password)
+    VALUES (@user_id, @name, @email,  @password);
 END;
 
 

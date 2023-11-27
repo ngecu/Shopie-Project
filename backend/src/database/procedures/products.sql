@@ -1,5 +1,5 @@
 
-CREATE PROCEDURE InsertProduct
+CREATE OR ALTER PROCEDURE InsertProduct
   @name VARCHAR(255),
   @price DECIMAL(18, 2),
   @discount INT,

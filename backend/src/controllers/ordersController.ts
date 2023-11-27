@@ -12,6 +12,7 @@ export const addOrderItems = async (req: Request, res: Response) => {
         taxPrice,
         shippingPrice,
         totalPrice,
+        user_id,
       } = req.body;
   
       if (!orderItems || orderItems.length === 0) {
@@ -22,7 +23,7 @@ export const addOrderItems = async (req: Request, res: Response) => {
       const pool = await mssql.connect(sqlConfig);
   
       const result = await pool.request()
-        .input('user_id', mssql.VarChar, req.user._id)
+        .input('user_id', mssql.VarChar, user_id)
         .input('orderItems', mssql.NVarChar, JSON.stringify(orderItems))
         .input('shippingAddress', mssql.NVarChar, JSON.stringify(shippingAddress))
         .input('paymentMethod', mssql.VarChar, paymentMethod)
@@ -30,7 +31,7 @@ export const addOrderItems = async (req: Request, res: Response) => {
         .input('taxPrice', mssql.Decimal, taxPrice)
         .input('shippingPrice', mssql.Decimal, shippingPrice)
         .input('totalPrice', mssql.Decimal, totalPrice)
-        .execute('usp_AddOrder');
+        .execute('AddOrder');
   
       const createdOrder = result.recordset[0];
   
@@ -87,9 +88,10 @@ export  const updateOrderToPaid = async (req: Request, res: Response) => {
   
 export  const getMyOrders = async (req: Request, res: Response) => {
     try {
+      const {user_id} = req.body
       const pool = await mssql.connect(sqlConfig);
       const result = await pool.request()
-        .input('user_id', mssql.VarChar, req.user._id)
+        .input('user_id', mssql.VarChar, user_id)
         .query('SELECT * FROM orders WHERE user_id = @user_id');
   
       const orders = result.recordset;
@@ -118,10 +120,11 @@ export  const getOrders = async (req: Request, res: Response) => {
   
 export const updateOrderToDelivered = async (req: Request, res: Response) => {
     try {
+      const {id} = req.params
       const pool = await mssql.connect(sqlConfig);
       const result = await pool.request()
-        .input('order_id', mssql.VarChar, req.params.id)
-        .execute('usp_UpdateOrderToDelivered');
+        .input('order_id', mssql.VarChar, id)
+        .execute('UpdateOrderToDelivered');
   
       const updatedOrder = result.recordset[0];
   

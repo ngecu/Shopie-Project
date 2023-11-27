@@ -23,7 +23,7 @@ export const registerUser = async (req:Request, res:Response) => {
         }
 
         const user_id = v4();
-        const hashedPwd = await bcrypt.hash(password, 10);
+        const hashedPwd = await bcrypt.hash(password, 5);
         const pool = await mssql.connect(sqlConfig);
 
         const emailTaken = await pool.request()
