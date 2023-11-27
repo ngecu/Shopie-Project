@@ -56,7 +56,6 @@ export const registerUser = async (req:Request, res:Response) => {
     }
 };
 
-
 export const loginUser = async(req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
@@ -67,7 +66,7 @@ export const loginUser = async(req: Request, res: Response) => {
 
         if (user[0]?.email == email) {
             const CorrectPwd = await bcrypt.compare(password, user[0]?.password);
-            // const CorrectPwd = true;
+
             if (!CorrectPwd) {
                 return res.status(401).json({
                     error: "Incorrect password"
@@ -86,9 +85,11 @@ export const loginUser = async(req: Request, res: Response) => {
             });
 
             const token = jwt.sign(LoginCredentials[0], process.env.SECRET as string);
-       
+            
+            console.log(token);
+            
             return res.status(200).json({
-                message: "Logged in successfully", token
+                message: "Logged in successfully", token,name:user[0]?.name
             });
         } else {
             return res.json({

@@ -1,7 +1,7 @@
 import { sqlConfig } from '../config/sqlConfig'
 import { Request, Response } from 'express'
 import mssql from 'mssql'
-
+import {v4} from 'uuid'
 export const getProducts = async (req: Request, res: Response) => {
     try {
       const pageSize = 10;
@@ -66,9 +66,13 @@ export const deleteProduct = async (req: Request, res: Response) => {
 
 export  const createProduct = async (req: Request, res: Response) => {
     try {
+      const product_id = v4();
       const {name,price,discount,image,category_id,countInStock,numReviews,description} = req.body
       const pool = await mssql.connect(sqlConfig);
       const result = await pool.request()
+
+      
+      .input('product_id', mssql.VarChar, product_id)
         .input('name', mssql.VarChar, name)
         .input('price', mssql.Decimal, price)
         .input('discount', mssql.Int, discount)
@@ -77,7 +81,7 @@ export  const createProduct = async (req: Request, res: Response) => {
         .input('countInStock', mssql.Int,countInStock)
         .input('numReviews', mssql.Int, numReviews)
         .input('description', mssql.Text, description)
-        .execute('usp_InsertProduct');
+        .execute('InsertProduct');
   
       const createdProduct = result.recordset[0];
       res.status(201).json(createdProduct);

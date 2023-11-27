@@ -1,5 +1,6 @@
 
-CREATE PROCEDURE InsertProduct
+CREATE OR ALTER PROCEDURE InsertProduct
+  @product_id VARCHAR(255),
   @name VARCHAR(255),
   @price DECIMAL(18, 2),
   @discount INT,
@@ -11,6 +12,7 @@ CREATE PROCEDURE InsertProduct
 AS
 BEGIN
   INSERT INTO products (
+    product_id,
     name,
     price,
     discount,
@@ -21,6 +23,7 @@ BEGIN
     description
   )
   VALUES (
+    @product_id,
     @name,
     @price,
     @discount,
