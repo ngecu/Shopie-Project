@@ -15,6 +15,8 @@ app.use(json())
 //   console.log("api is working");
 // });
 
+// const __dirname = path.resolve()
+// app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 app.use('/user', user_router)
 app.use('/product', product_router)

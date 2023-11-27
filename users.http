@@ -3,10 +3,10 @@
 POST http://localhost:5000/user/register
 Content-Type: application/json
 
-{   "name":"Robinson Ngecu",
-    "email": "devngecu@gmail.com",
-    "phone_number":0707583092,
-    "password": "3W!W.:srzc4r^!P"
+{   "name":"Crispin Mandwa",
+    "email": "cris@gmail.com",
+    "phone_number":"0707583091",
+    "password": "3W!W.:srzc4r^!pP"
 }
 
 ###
@@ -14,7 +14,7 @@ POST http://localhost:5000/user/login
 Content-Type: application/json
 
 {
-    "email": "admin@gmail.com",
+    "email": "devngecu@gmail.com",
     "password": "3W!W.:srzc4r^!P"
 }
 
