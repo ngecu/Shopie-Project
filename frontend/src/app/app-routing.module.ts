@@ -15,6 +15,8 @@ import { OrdersComponent } from './orders/orders.component';
 import { LostPasswordComponent } from './lost-password/lost-password.component';
 import { ProductsComponent } from './products/products.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 const routes: Routes = [
   {path:'',component:LandingComponent},
@@ -28,10 +30,15 @@ const routes: Routes = [
   {path:'my-account/products',component:ProductsComponent},
   {path:'my-account/categories',component:CategoriesComponent},
   {path:'my-account/orders',component:OrdersComponent},
-  {path:'category/:id',component:CategoryComponent},
+  {path:'category/:categoryId',component:CategoryComponent},
   {path:'product/:id',component:ProductComponent},
   {path:'lost-password',component:LostPasswordComponent},
   {path:'add_category',component:AddCategoryComponent},
+  {path:'add_product',component:AddProductComponent},
+  {path:'my-account/edit_product/:productId',component:EditProductComponent},
+
+  
+  
 
   
 

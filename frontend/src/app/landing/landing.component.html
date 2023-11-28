@@ -11,17 +11,10 @@
       <p class="text-lg font-bold mb-4">Categories</p>
     
       <!-- Category tags with router links and active class -->
-      <a routerLink="/category/1" routerLinkActive="text-white" class="inline-block px-2 py-1 mr-2 text-sm font-medium text-blue-700 bg-blue-200 rounded-full hover:bg-blue-300 focus:outline-none focus:ring focus:border-blue-300 transition duration-150 ease-in-out">
-        Category 1
-      </a>
-    
-      <a routerLink="/category/2" routerLinkActive="text-white" class="inline-block px-2 py-1 mr-2 text-sm font-medium text-blue-700 bg-blue-200 rounded-full hover:bg-blue-300 focus:outline-none focus:ring focus:border-blue-300 transition duration-150 ease-in-out">
-        Category 2
-      </a>
-    
-      <a routerLink="/category/3" routerLinkActive="text-white" class="inline-block px-2 py-1 mr-2 text-sm font-medium text-blue-700 bg-blue-200 rounded-full hover:bg-blue-300 focus:outline-none focus:ring focus:border-blue-300 transition duration-150 ease-in-out">
-        Category 3
-      </a>
+      <a *ngFor="let category of categories" [routerLink]="['/category', category.category_id]" routerLinkActive="text-white" class="inline-block px-2 py-1 mr-2 text-sm font-medium text-blue-700 bg-blue-200 rounded-full hover:bg-blue-300 focus:outline-none focus:ring focus:border-blue-300 transition duration-150 ease-in-out">
+        {{category.category_name}}
+     </a>
+         
     </div>
     
     

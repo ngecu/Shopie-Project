@@ -25,6 +25,8 @@ import { OrdersComponent } from './orders/orders.component';
 import { LostPasswordComponent } from './lost-password/lost-password.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 
 @NgModule({
@@ -51,6 +53,8 @@ import { AddCategoryComponent } from './add-category/add-category.component';
     OrdersComponent,
     LostPasswordComponent,
     AddCategoryComponent,
+    AddProductComponent,
+    EditProductComponent,
   ],
   imports: [
     AppRoutingModule,
