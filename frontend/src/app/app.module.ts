@@ -12,6 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SearchpageComponent } from './searchpage/searchpage.component';
 import { CategoryComponent } from './category/category.component';
 import { ProductComponent } from './product/product.component';
+import { CarouselComponent } from './carousel/carousel.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ProductComponent } from './product/product.component';
     SearchpageComponent,
     CategoryComponent,
     ProductComponent,
+    CarouselComponent,
   ],
   imports: [
     AppRoutingModule,
