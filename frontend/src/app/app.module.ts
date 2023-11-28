@@ -12,9 +12,6 @@ import { FooterComponent } from './footer/footer.component';
 import { SearchpageComponent } from './searchpage/searchpage.component';
 import { CategoryComponent } from './category/category.component';
 import { ProductComponent } from './product/product.component';
-<<<<<<< HEAD
-import { CarouselComponent } from './carousel/carousel.component';
-=======
 import { BasketComponent } from './basket/basket.component';
 import { AdminComponent } from './admin/admin.component';
 import { MyaccountComponent } from './myaccount/myaccount.component';
@@ -26,7 +23,11 @@ import { ProductsComponent } from './products/products.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { OrdersComponent } from './orders/orders.component';
 import { LostPasswordComponent } from './lost-password/lost-password.component';
->>>>>>> 5d83f686adb140f394ce15d53ac4fdcfa9ced694
+import { CarouselComponent } from './carousel/carousel.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 @NgModule({
@@ -39,10 +40,8 @@ import { LostPasswordComponent } from './lost-password/lost-password.component';
     FooterComponent,
     SearchpageComponent,
     CategoryComponent,
-    ProductComponent,
-<<<<<<< HEAD
     CarouselComponent,
-=======
+    ProductComponent,
     BasketComponent,
     AdminComponent,
     MyaccountComponent,
@@ -54,7 +53,10 @@ import { LostPasswordComponent } from './lost-password/lost-password.component';
     CategoriesComponent,
     OrdersComponent,
     LostPasswordComponent,
->>>>>>> 5d83f686adb140f394ce15d53ac4fdcfa9ced694
+    AddCategoryComponent,
+    AddProductComponent,
+    EditProductComponent,
+    CheckoutComponent,
   ],
   imports: [
     AppRoutingModule,

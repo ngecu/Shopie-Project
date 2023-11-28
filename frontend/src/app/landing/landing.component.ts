@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Category } from '../interfaces/category';
+import { CategoriesService } from '../services/categories.service';
 
 
 
@@ -8,11 +11,25 @@ import { Component } from '@angular/core';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent {
-  
-  constructor() {
-    
-   }
 
+  categories:Category[] = []
+  error:boolean = false;
+  errorMessage:string = ''
+  
+  constructor(private categoryService: CategoriesService, private router: Router){
+  
+
+
+    this.getCategories()
+  }
+
+  async getCategories(){
+    let response = await this.categoryService.geCategories();
+  console.log(response);
+
+  this.categories = response
+
+  }
 
    
 
