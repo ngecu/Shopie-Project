@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Event } from '../interfaces/event';
+import { Event } from '../interfaces/product';
 
 @Component({
   selector: 'app-searchpage',
