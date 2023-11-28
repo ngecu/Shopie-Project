@@ -3,7 +3,6 @@ CREATE OR ALTER PROCEDURE InsertProduct
  @name VARCHAR(255),
  @price DECIMAL(18, 2),
  @discount INT,
- @tags VARCHAR(255),
  @image VARCHAR(255),
  @category_id VARCHAR(255),
  @countInStock INT,

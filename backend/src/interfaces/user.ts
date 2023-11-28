@@ -7,6 +7,7 @@ export interface User {
     phone_number: string,
     password: string,
     role: number
+
 }
 
 export interface LoginUser extends Request {

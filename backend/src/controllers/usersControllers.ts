@@ -305,3 +305,5 @@ export const deleteUser = async (req: ExtendedUser, res: Response) => {
         res.status(500).json({ error: 'Internal server dan' });
       }
   };
+
+
