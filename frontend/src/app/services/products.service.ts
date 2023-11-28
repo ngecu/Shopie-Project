@@ -44,6 +44,8 @@ export class ProductsService {
     });
 
     const data = await response.json();
+    console.log(data);
+    
     return data;
   }
 
@@ -77,4 +79,18 @@ export class ProductsService {
     const data = await response.json();
     return data;
   }
+
+    async categoryProducts(categoryId: string) {
+    let token = localStorage.getItem('token') as string
+    const url = `${this.baseUrl}/category/${categoryId}`;
+    const response = await fetch(url, {
+      method: 'GET',
+
+    });
+
+    const data = await response.json();
+    return data;
+  }
+
+
 }

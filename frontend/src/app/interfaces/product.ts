@@ -8,6 +8,5 @@ export interface Product {
   countInStock: number;
   numReviews: number;
   description: string;
+  qty:number;
 }
-
-

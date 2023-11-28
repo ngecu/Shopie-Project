@@ -8,9 +8,9 @@ export class CategoriesService {
 
   constructor() { }
 
-  async geCategroies(){
+  async geCategories(){
     let token = localStorage.getItem('token') as string;
-    let res = await fetch('http://localhost:5000/category/allCategories', {
+    let res = await fetch('http://localhost:5000/category', {
       headers:{
         "Content-type": "application/json",
         "token": token
