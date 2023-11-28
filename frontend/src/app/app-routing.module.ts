@@ -17,6 +17,7 @@ import { ProductsComponent } from './products/products.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const routes: Routes = [
   {path:'',component:LandingComponent},
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path:'add_category',component:AddCategoryComponent},
   {path:'add_product',component:AddProductComponent},
   {path:'my-account/edit_product/:productId',component:EditProductComponent},
+  {path:'checkout',component:CheckoutComponent},
 
   
   

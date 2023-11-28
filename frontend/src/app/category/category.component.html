@@ -8,13 +8,13 @@
             <div class="flex flex-wrap">
                 
                 <div *ngFor="let product of products; let i = index" class="flex-shrink-0 w-64 bg-white mr-4 rounded-lg shadow-md m-2 ">
-                  <img src="https://image.kilimall.com/kenya/shop/adv/09e9f164d95d15eb1f58149d7605388f.jpg.webp" alt="Product 1" class="w-full h-40 object-cover mb-4 rounded-md">
+                  <img src="{{product.image}}" alt="Product 1" class="w-full h-40 object-cover mb-4 rounded-md">
                   
                     <div class="p-2">
                         <h3 class="text-lg font-bold mb-2">{{product.name}}</h3>
-                        <p class="text-gray-700">Description for Product 1.</p>
+                        <p class="text-gray-700">{{product.description.slice(0,20)}}</p>
                         <div class="mt-2 flex items-center">
-                          <span class="text-green-500 font-bold mr-2">$49.99</span>
+                          <span class="text-green-500 font-bold mr-2">{{product.price}}</span>
                           <span class="text-gray-500 line-through">$59.99</span>
                         </div>
                         <div class="flex items-center mt-2">
@@ -25,7 +25,7 @@
                         </div>
                         <button (click)="addToCart(product)">Add to Cart</button>
 
-                        <a routerLink="/product/1" class="mt-4 text-blue-500 hover:underline">View Details</a>
+                        <a routerLink="/product/:product.product_id" class="mt-4 text-blue-500 hover:underline">View Details</a>
                     </div>
                  
                 </div>

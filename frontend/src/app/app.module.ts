@@ -27,6 +27,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { EditProductComponent } from './edit-product/edit-product.component';
     AddCategoryComponent,
     AddProductComponent,
     EditProductComponent,
+    CheckoutComponent,
   ],
   imports: [
     AppRoutingModule,
