@@ -22,25 +22,49 @@
                     </thead>
                     <tbody>
                         <!-- Example row, replace with your data -->
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">John Doe</td>
-                            <td class="px-6 py-4 whitespace-nowrap">john@example.com</td>
+                        <tr *ngFor="let user of users; let i = index" class="hover:bg-gray-100">
+                            <td class="py-2 px-4 border-b">{{ user.name }}</td>
+                            <td class="py-2 px-4 border-b">{{ user.email }}</td>
+                           
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="text-green-500 h-5 w-5" viewBox="0 0 20 20">
-                                    <path d="M10 1C4.48 1 0 5.48 0 11s4.48 10 10 10 10-4.48 10-10S15.52 1 10 1zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-                                </svg>
+                                <ng-container *ngIf="user.role === 0; else activeIcon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="text-red-500 h-5 w-5" viewBox="0 0 20 20">
+                                      <path d="M10 2C5.03 2 1 6.03 1 11s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
+                                    </svg>
+                                  </ng-container>
+                                  <ng-template #activeIcon>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="text-green-500 h-5 w-5" viewBox="0 0 20 20">
+                                      <path d="M10 2C5.03 2 1 6.03 1 11s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
+                                    </svg>
+                                  </ng-template>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="text-green-500 h-5 w-5" viewBox="0 0 20 20">
-                                    <path d="M10 2C5.03 2 1 6.03 1 11s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
-                                </svg>
+                                <ng-container *ngIf="user.welcomed === 0; else activeIcon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="text-red-500 h-5 w-5" viewBox="0 0 20 20">
+                                      <path d="M10 2C5.03 2 1 6.03 1 11s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
+                                    </svg>
+                                  </ng-container>
+                                  <ng-template #activeIcon>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="text-green-500 h-5 w-5" viewBox="0 0 20 20">
+                                      <path d="M10 2C5.03 2 1 6.03 1 11s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
+                                    </svg>
+                                  </ng-template>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="text-red-500 h-5 w-5" viewBox="0 0 20 20">
-                                    <path d="M10 2C5.03 2 1 6.03 1 11s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
-                                </svg>
+                                <ng-container *ngIf="user.active === 0; else activeIcon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="text-red-500 h-5 w-5" viewBox="0 0 20 20">
+                                      <path d="M10 2C5.03 2 1 6.03 1 11s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
+                                    </svg>
+                                  </ng-container>
+                                  <ng-template #activeIcon>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="text-green-500 h-5 w-5" viewBox="0 0 20 20">
+                                      <path d="M10 2C5.03 2 1 6.03 1 11s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
+                                    </svg>
+                                  </ng-template>
+                                  
                             </td>
-                        </tr>
+
+                          </tr>
                         <!-- Replace with more rows as needed -->
                     </tbody>
                 </table>
