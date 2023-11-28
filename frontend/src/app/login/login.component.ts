@@ -35,7 +35,7 @@ export class LoginComponent {
 
     
     this.registrationForm = this.fb.group({
-      full_name: ['',[Validators.required]],
+      name: ['',[Validators.required]],
       email: ['',[Validators.required]],
       password: ['',[Validators.required]],
       confirm_password: ['',[Validators.required]],
@@ -119,15 +119,11 @@ export class LoginComponent {
           this.loggedInState = true
           this.successMessage = response.message
           this.loggedIn = true
-          let {role,name,email,phone_number,user_id} = await this.userService.checkDetails()
-          localStorage.setItem('loggedIn', `${this.loggedIn}`)  
-          localStorage.setItem('name', `${name}`)  
-          localStorage.setItem('email', `${email}`)  
-          localStorage.setItem('phone_number', `${phone_number}`)  
-          localStorage.setItem('user_id', `${user_id}`)  
-          localStorage.setItem('role', `${role}`)  
+          localStorage.setItem('loggedIn', `${this.loggedIn}`) 
+          let user_details = await this.userService.checkDetails();
+          localStorage.setItem('user_details', JSON.stringify(user_details));
           
-          console.log(role);
+
           
     
           setTimeout( async() => {
@@ -136,11 +132,9 @@ export class LoginComponent {
             
             
     
-            if(role == 1){
-              this.router.navigate(['admin'])
-            }else if(role == 0){
-              this.router.navigate(['user'])
-            }
+         
+              this.router.navigate(['my-account'])
+            
           }, 2000);
      
         }

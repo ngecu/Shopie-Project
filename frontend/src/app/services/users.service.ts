@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -35,15 +36,7 @@ export class UsersService {
     let data = await res.json()
 
 
-    
-
-    let role = data.info.role
-    let name = data.info.full_name
-    let email = data.info.email
-    let phone_number = data.info.phone_number
-    let user_id = data.info.user_id
-
-    return {role,name,email,phone_number,user_id}
+    return data.info
   }
 
   async getOneUser(user_id: string){
@@ -97,6 +90,33 @@ export class UsersService {
         method: 'PUT', 
 
         body: JSON.stringify( {active:newActivationStatus} )
+      });
+  
+      const data = await response.json();
+      // console.log("dat is ",data);
+      
+
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateUserDetails(user_id: string, newUserDetails: any) {
+    try {
+      const token = localStorage.getItem('token') || '';
+      const url = `http://localhost:5000/user/update/${user_id}`;
+      const headers = {
+        'Content-Type': 'application/json',
+        'token': token
+      };
+  
+   
+      const response = await fetch(url, {
+        headers: headers,
+        method: 'PUT', 
+
+        body: JSON.stringify( {newUserDetails} )
       });
   
       const data = await response.json();

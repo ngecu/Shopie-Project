@@ -12,7 +12,10 @@ import { ExtendedUser } from '../middlewares/verifyToken'
 export const dbhelper = new Connection
  
 export const registerUser = async (req:Request, res:Response) => {
+    console.log(req.body);
     try {
+        
+        
         const { name, email, password } = req.body;
 
         
@@ -33,7 +36,7 @@ export const registerUser = async (req:Request, res:Response) => {
 
         if (emailTaken.recordset.length > 0) {
             return res.status(400).json({
-                message: 'This email is already in use',
+                error: 'This email is already in use',
             });
         }
 
@@ -258,5 +261,47 @@ export const deleteUser = async (req: ExtendedUser, res: Response) => {
       } catch (error) {
         console.error('Error updating user activation status:', error);
         res.status(500).json({ error: 'Internal server error' });
+      }
+  };
+
+
+  export const updateUserDetails = async (req: ExtendedUser, res: Response) => {
+    
+    try {
+        const userId = req.params.user_id;
+        const { name,email,password } = req.body;
+
+        
+
+        const hashedPwd = await bcrypt.hash(password, 5);
+
+        const updateQuery = `
+        UPDATE users
+        SET name = '${name}',
+            email = '${email}',
+            password = '${password}'
+        WHERE user_id = '${userId}';
+      `;
+      
+      const pool = await mssql.connect(sqlConfig);
+
+      
+      
+      const result = await pool.request().query(updateQuery);
+
+      
+      
+    
+        const updatedUser = result.rowsAffected[0];
+    
+       console.log(updatedUser);
+        if (!updatedUser) {
+          return res.status(404).json({ error: 'User not found' });
+        }
+    
+        res.status(200).json(updatedUser);
+      } catch (error) {
+        console.error('Error ', error);
+        res.status(500).json({ error: 'Internal server dan' });
       }
   };
