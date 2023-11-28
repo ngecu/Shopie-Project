@@ -5,13 +5,31 @@ import { RegisterComponent } from './register/register.component';
 import { LandingComponent } from './landing/landing.component';
 import { CategoryComponent } from './category/category.component';
 import { ProductComponent } from './product/product.component';
+import { BasketComponent } from './basket/basket.component';
+import { MyaccountComponent } from './myaccount/myaccount.component';
+import { MyordersComponent } from './myorders/myorders.component';
+import { EditaccountComponent } from './editaccount/editaccount.component';
+import { UsersComponent } from './users/users.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { OrdersComponent } from './orders/orders.component';
+import { LostPasswordComponent } from './lost-password/lost-password.component';
+import { ProductsComponent } from './products/products.component';
 
 const routes: Routes = [
   {path:'',component:LandingComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
+  {path:'basket',component:BasketComponent},
+  {path:'my-account',component:MyaccountComponent},
+  {path:'my-account/orders',component:MyordersComponent},
+  {path:'my-account/edit-account',component:EditaccountComponent},
+  {path:'my-account/users',component:UsersComponent},
+  {path:'my-account/products',component:ProductsComponent},
+  {path:'my-account/categories',component:CategoriesComponent},
+  {path:'my-account/orders',component:OrdersComponent},
   {path:'category/:id',component:CategoryComponent},
-  {path:'product/:id',component:ProductComponent}
+  {path:'product/:id',component:ProductComponent},
+  {path:'lost-password',component:LostPasswordComponent},
 
 
 ];

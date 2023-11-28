@@ -54,3 +54,18 @@ Content-Type: application/json
     "email": "admin@gmail.com",
     "password": "3W!W.:srzc4r^!P"
 }
+
+
+###
+PUT http://localhost:5000/user/update/a7cb7fef-a827-4e30-9a45-dcf6bbbbfb51
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNzYyNTNjZTQtMTI4My00NjVmLTlhOTUtZGU5NGYxMTRlMzIzIiwibmFtZSI6IlJvYmluc29uIE5nZWN1IiwiZW1haWwiOiJkZXZuZ2VjdUBnbWFpbC5jb20iLCJyb2xlIjowLCJ3ZWxjb21lZCI6MCwiYWN0aXZlIjoxLCJpYXQiOjE3MDExNTg3OTB9.h2q_lIx3hVEvPBpTZYdzhSSdRIp0meppK8gm3xCC_9w
+
+{
+    
+            "email":	"devngec2@gmail.com",
+            "name"	:"Robinson2",
+            "password"	:"3W!W.:srzc4r^!P"
+    
+
+}

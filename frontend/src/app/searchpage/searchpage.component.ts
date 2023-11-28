@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Event } from '../interfaces/event';
+import { Product } from '../interfaces/product';
+
 
 @Component({
   selector: 'app-searchpage',
@@ -9,7 +10,7 @@ import { Event } from '../interfaces/event';
 })
 export class SearchpageComponent {
   searchTerm!: string;
-  events!: Event[]
+  products!: Product[]
 
   constructor(private route: ActivatedRoute) {
     

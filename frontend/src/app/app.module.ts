@@ -12,7 +12,21 @@ import { FooterComponent } from './footer/footer.component';
 import { SearchpageComponent } from './searchpage/searchpage.component';
 import { CategoryComponent } from './category/category.component';
 import { ProductComponent } from './product/product.component';
+<<<<<<< HEAD
 import { CarouselComponent } from './carousel/carousel.component';
+=======
+import { BasketComponent } from './basket/basket.component';
+import { AdminComponent } from './admin/admin.component';
+import { MyaccountComponent } from './myaccount/myaccount.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { MyordersComponent } from './myorders/myorders.component';
+import { EditaccountComponent } from './editaccount/editaccount.component';
+import { UsersComponent } from './users/users.component';
+import { ProductsComponent } from './products/products.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { OrdersComponent } from './orders/orders.component';
+import { LostPasswordComponent } from './lost-password/lost-password.component';
+>>>>>>> 5d83f686adb140f394ce15d53ac4fdcfa9ced694
 
 
 @NgModule({
@@ -26,7 +40,21 @@ import { CarouselComponent } from './carousel/carousel.component';
     SearchpageComponent,
     CategoryComponent,
     ProductComponent,
+<<<<<<< HEAD
     CarouselComponent,
+=======
+    BasketComponent,
+    AdminComponent,
+    MyaccountComponent,
+    SidebarComponent,
+    MyordersComponent,
+    EditaccountComponent,
+    UsersComponent,
+    ProductsComponent,
+    CategoriesComponent,
+    OrdersComponent,
+    LostPasswordComponent,
+>>>>>>> 5d83f686adb140f394ce15d53ac4fdcfa9ced694
   ],
   imports: [
     AppRoutingModule,
