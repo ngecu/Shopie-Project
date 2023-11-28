@@ -13,6 +13,7 @@ import { UsersComponent } from './users/users.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { OrdersComponent } from './orders/orders.component';
 import { LostPasswordComponent } from './lost-password/lost-password.component';
+import { ProductsComponent } from './products/products.component';
 
 const routes: Routes = [
   {path:'',component:LandingComponent},
@@ -23,7 +24,7 @@ const routes: Routes = [
   {path:'my-account/orders',component:MyordersComponent},
   {path:'my-account/edit-account',component:EditaccountComponent},
   {path:'my-account/users',component:UsersComponent},
-  {path:'my-account/products',component:ProductComponent},
+  {path:'my-account/products',component:ProductsComponent},
   {path:'my-account/categories',component:CategoriesComponent},
   {path:'my-account/orders',component:OrdersComponent},
   {path:'category/:id',component:CategoryComponent},

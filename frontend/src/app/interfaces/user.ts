@@ -1,9 +1,11 @@
 export interface User {
-    user_id?:string;
-    full_name: string;
+    user_id: string;
+    name: string;
     email: string;
-    phone_number: string;
-    password?: string;
-    confirm_password?: string;
-    active?:number
-}
+    password: string;
+    confirm_password:string;
+    role: number;
+    welcomed?: number;
+    active?: number;
+  }
+  
