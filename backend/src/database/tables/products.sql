@@ -1,3 +1,5 @@
+drop TABLE products
+ 
 
 CREATE TABLE products (
     product_id VARCHAR(255) PRIMARY KEY,
