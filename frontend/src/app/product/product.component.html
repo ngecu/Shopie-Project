@@ -10,15 +10,16 @@
     <!-- Left Image -->
     <div class="w-1/2">
       <img
-      src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D"
-        alt="Tour Image Left" class="w-full h-auto">
+      src="{{product.image}}"
+      
+      alt="Tour Image Left" class="w-full h-auto">
     </div>
 
 
 
     <!-- Right Details -->
     <div class="w-1/2 pl-8">
-      <h4 class="text-3xl font-semibold mb-4"> Garnier Official Store Even & Matte Normal To Oily Skin Face Cream Moisturizer 40ml Skin Care White 40m</h4>
+      <h4 class="text-3xl font-semibold mb-4">{{product.name}} </h4>
 
       <hr />
 
@@ -34,14 +35,13 @@
 
       <hr />
 
-      <h1>Price : Ksh 519</h1>
+      <h1>Price : Ksh {{product.price}}</h1>
 
       <hr />
       <p class="text-gray-500">
         Description : <br/>
 
-        Balozi Lager is a rich, natural tasting beer made from pure water originating from the heart of the Aberdares and the finest malted barley with no added sugar. It is produced in Kenya and it has an alcohol content of 4.2%.
-
+        {{product.description}}
 
       </p>
 
@@ -53,7 +53,7 @@
                 Price:
             </td>
             <td class="py-2 px-4">
-                Ksh 1418
+                Ksh {{product.price}}
             </td>
         </tr>
         <hr />
@@ -63,11 +63,16 @@
                 Status:
             </td>
             <td class="py-2 px-4">
-                In Stock
+                <span *ngIf="product.countInStock > 0" class="bg-green-500 text-white py-1 px-2 rounded-full">
+                    In Stock
+                </span>
+                <span *ngIf="product.countInStock === 0" class="bg-red-500 text-white py-1 px-2 rounded-full">
+                    Out of Stock
+                </span>
             </td>
         </tr>
         <hr />
-        <tr>
+        <tr *ngIf="product.countInStock > 0">
             <td class="py-2 px-4 font-bold">
                 Qty:
             </td>
@@ -84,7 +89,7 @@
             
         </tr>
         <tr>
-            <td class="py-2 px-4" colspan="2">
+            <td *ngIf="product.countInStock > 0" class="py-2 px-4" colspan="2">
                 <button class="w-full bg-green-500 text-white px-4 py-2 rounded focus:outline-none focus:shadow-outline-green hover:bg-green-600">
                     ADD TO CART
                 </button>
@@ -105,7 +110,7 @@
             <div class="flex justify-between items-center mb-6">
               <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion (20)</h2>
           </div>
-          <form class="mb-6">
+          <form *ngif="loggedin" class="mb-6">
               <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                   <label for="comment" class="sr-only">Your comment</label>
                   <textarea id="comment" rows="6"

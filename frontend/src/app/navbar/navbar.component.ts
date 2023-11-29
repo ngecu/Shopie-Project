@@ -6,6 +6,7 @@ import {
   Dropdown,
   initTE,
 } from "tw-elements";
+import { Product } from '../interfaces/product';
 
 
 @Component({
@@ -20,19 +21,36 @@ export class NavbarComponent implements OnInit {
   loggedInTrue = localStorage.getItem('loggedIn');
   name = localStorage.getItem('name');
   role = Number(localStorage.getItem('role')) ;
-  
+  cartItems: Product[] = [];
+  searchText=""
+
+ 
+    products: Product[] = []; // Assume you have a list of products
+    filteredProducts: Product[] = [];
 
   loggedIn = this.loggedInTrue;
+  total_items : Number  = 0
 
   constructor(private fb: FormBuilder, private router: Router) {
     
     this.searchForm = this.fb.group({
       searchTerm: [''] 
+      
     });
   }
-
   ngOnInit(): void {
-    initTE({ Dropdown });
+    const storedCartItems = localStorage.getItem('cartItems');
+    this.cartItems = storedCartItems ? JSON.parse(storedCartItems) : [];
+
+ 
+
+
+
+    this.total_items = Number(this.cartItems.reduce((acc, item) => acc + item.qty, 0))
+
+    if(this.cartItems.length == 0){
+      this.total_items = 0
+    }
     this.checkLoggedIn();
   }
 
@@ -50,6 +68,7 @@ export class NavbarComponent implements OnInit {
       queryParams: { term: searchTerm },
     });
   }
+  
   
 
   checkLoggedIn() {

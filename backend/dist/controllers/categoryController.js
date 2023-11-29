@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createCategory = void 0;
+exports.getAllCategories = exports.createCategory = void 0;
 const sqlConfig_1 = require("../config/sqlConfig");
 const mssql_1 = __importDefault(require("mssql"));
 const uuid_1 = require("uuid");
@@ -28,12 +28,31 @@ const createCategory = (req, res) => __awaiter(void 0, void 0, void 0, function*
             .input('category_description', mssql_1.default.VarChar, category_description)
             .input('category_image', mssql_1.default.VarChar, category_image)
             .execute('InsertCategory');
-        const createdCategory = result.recordset[0];
-        res.status(201).json(createdCategory);
+        const createdCategory = result.rowsAffected[0];
+        if (!createdCategory) {
+            return res.status(404).json({ error: "error" });
+        }
+        res.status(200).json({ message: "Category created successfully" });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error });
+    }
+});
+exports.createCategory = createCategory;
+const getAllCategories = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const pool = yield mssql_1.default.connect(sqlConfig_1.sqlConfig);
+        const result = yield pool.request().query('SELECT * FROM categories');
+        const categories = result.recordset;
+        if (!categories || categories.length === 0) {
+            return res.status(404).json({ error: 'No categories found' });
+        }
+        res.status(200).json(categories);
     }
     catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-exports.createCategory = createCategory;
+exports.getAllCategories = getAllCategories;

@@ -12,14 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createProductReview = exports.updateProduct = exports.deleteProduct = exports.getProductById = exports.getProducts = exports.createProduct = void 0;
+exports.getProductsByCategory = exports.createProductReview = exports.updateProduct = exports.deleteProduct = exports.getProductById = exports.getProducts = exports.createProduct = void 0;
 const sqlConfig_1 = require("../config/sqlConfig");
 const mssql_1 = __importDefault(require("mssql"));
 const uuid_1 = require("uuid");
 const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const product_id = (0, uuid_1.v4)();
-        const { name, price, discount, image, category_id, countInStock, numReviews, description, tags } = req.body;
+        const { name, price, discount, image, category_id, countInStock, numReviews, description } = req.body;
         const pool = yield mssql_1.default.connect(sqlConfig_1.sqlConfig);
         const result = yield pool.request()
             .input('product_id', mssql_1.default.VarChar, product_id)
@@ -27,14 +27,14 @@ const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             .input('price', mssql_1.default.Decimal, price)
             .input('discount', mssql_1.default.Int, discount)
             .input('image', mssql_1.default.VarChar, image)
-            .input('tags', mssql_1.default.VarChar, tags)
             .input('category_id', mssql_1.default.VarChar, category_id)
             .input('countInStock', mssql_1.default.Int, countInStock)
             .input('numReviews', mssql_1.default.Int, numReviews)
             .input('description', mssql_1.default.Text, description)
             .execute('InsertProduct');
-        const createdProduct = result.recordset[0];
-        res.status(201).json(createdProduct);
+        return res.status(200).json({
+            message: 'Product created successfully',
+        });
     }
     catch (error) {
         console.error(error);
@@ -168,3 +168,23 @@ const createProductReview = (req, res) => __awaiter(void 0, void 0, void 0, func
     }
 });
 exports.createProductReview = createProductReview;
+const getProductsByCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { category_id } = req.params;
+        const pool = yield mssql_1.default.connect(sqlConfig_1.sqlConfig);
+        const result = yield pool
+            .request()
+            .input('category_id', mssql_1.default.VarChar(500), category_id)
+            .execute('GetProductsByCategory');
+        const products = result.recordset;
+        if (!products || products.length === 0) {
+            return res.status(404).json({ error: 'No products found for the given category' });
+        }
+        res.status(200).json(products);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+exports.getProductsByCategory = getProductsByCategory;

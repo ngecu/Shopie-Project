@@ -28,6 +28,7 @@ import { AddCategoryComponent } from './add-category/add-category.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { CustomFilterPipePipe } from './custom-filter-pipe.pipe';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
     AddProductComponent,
     EditProductComponent,
     CheckoutComponent,
+    CustomFilterPipePipe,
   ],
   imports: [
     AppRoutingModule,

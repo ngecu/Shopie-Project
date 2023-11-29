@@ -1,40 +1,30 @@
 <body class="bg-dark">
 <app-navbar></app-navbar>
 
-<section style="background-image: url('https://image.kilimall.com/kenya/shop/activity/x9ya31ad2Eqv3wcZeReJK1GPhDI7kKxomEHScfK8.gif');">
+<section style="background-image: url('https://image.kilimall.com/kenya/shop/activity/x9ya31ad2Eqv3wcZeReJK1GPhDI7kKxomEHScfK8.gif'); ">
 
-  <div class="container m-2 w-[60vw] block mx-auto justify-center items-center bg-black text-white" >
-  <div class="flex bg-black">
-   
-    <div class="flex-1 min-w-0 bg-white">
-      <!-- Content for the left div -->
-      <p class="text-lg font-bold mb-4">Categories</p>
-    
-      <!-- Category tags with router links and active class -->
-      <a *ngFor="let category of categories" [routerLink]="['/category', category.category_id]" routerLinkActive="text-white" class="inline-block px-2 py-1 mr-2 text-sm font-medium text-blue-700 bg-blue-200 rounded-full hover:bg-blue-300 focus:outline-none focus:ring focus:border-blue-300 transition duration-150 ease-in-out">
-        {{category.category_name}}
-     </a>
-         
-    </div>
-    
-    
-<!-- 
-    <div class="flex-3 bg-gray-300 ">
-      
-      <img class="max-w-full h-auto mx-auto" src="https://image.kilimall.com/kenya/shop/adv/b56afe24cf08b90d727e1579c28b491d.jpg.webp" alt="Poster">
-    </div> -->
-
-
-    
- 
-
-  </div>
-</div>
 
 <div   class="flex flex-row ..." style="  margin: 0 30px; ">
   <div class="basis-1/4 bg"></div>
   <div><app-carousel></app-carousel></div>
   <div class="basis-1/4 bg"></div>
+</div>
+
+<div class="container m-2 w-[80vw] mt-2 p-4 bg-black text-white">
+  <div class="flex flex-wrap -mx-4">
+
+    <div *ngFor="let category of categories" class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4 mb-4">
+      <a [routerLink]="['/category', category.category_id]" routerLinkActive="text-white" class="block w-full bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+        <img [src]="category.category_image" alt="{{ category.category_name }}" class="w-full h-40 object-cover object-center">
+        <div class="p-4">
+          <p class="text-lg font-bold mb-2">{{ category.category_name }}</p>
+          <!-- Add additional styling for category description if needed -->
+          <!-- <p class="text-sm text-gray-500">{{ category.category_description }}</p> -->
+        </div>
+      </a>
+    </div>
+
+  </div>
 </div>
 
 

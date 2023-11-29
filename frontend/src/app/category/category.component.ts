@@ -11,6 +11,9 @@ import { ProductsService } from '../services/products.service';
 export class CategoryComponent {
 
   categoryId: string = ""
+  category: string = ""
+
+  
   products:Product[] = []
   constructor(private route: ActivatedRoute,private router: Router, private productService: ProductsService) {
 
@@ -32,6 +35,11 @@ export class CategoryComponent {
     // Replace 'productId' with the actual ID of the product to edit
     const products = await this.productService.categoryProducts(this.categoryId);
       this.products = products
+      console.log(products);
+      
+
+      this.category = products[0].category_name
+
 
     console.log(products);
     
