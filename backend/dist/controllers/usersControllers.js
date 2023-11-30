@@ -110,33 +110,6 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.loginUser = loginUser;
-// export const manageProfile = async (req: Request, res: Response) => {
-//     try {
-//         const { new_password, email } = req.body;
-//         console.log(req.body);
-//         // Check if the email exists in the database
-//         const emailExists = (await dbhelper.query(`SELECT * FROM users WHERE email = '${email}'`)).recordset;
-//         if (!emailExists || emailExists.length === 0) {
-//             return res.status(404).json({ error: "Email not found" });
-//         }
-//         // Hash the new password
-//         // const hashedNewPassword = await bcrypt.hash(new_password, 10);
-//         const hashedNewPassword = true;
-//         // Update the user's password in the database
-//         await dbhelper.execute('manageProfile', {
-//             new_password: hashedNewPassword,
-//             user_id: emailExists[0].user_id,
-//         });
-//         return res.status(200).json({
-//             message: 'Password reset successfully'
-//         });
-//     } catch (error) {
-//         console.log(error);
-//         return res.status(500).json({
-//             error: error.message
-//         });
-//     }
-// };
 const checkUserDetails = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (req.info) {
         console.log(req.info);
@@ -249,7 +222,7 @@ const updateUserDetails = (req, res) => __awaiter(void 0, void 0, void 0, functi
         if (!updatedUser) {
             return res.status(404).json({ error: 'User not found' });
         }
-        res.status(200).json(updatedUser);
+        res.status(200).json({ message: "user details updated successfully" });
     }
     catch (error) {
         console.error('Error ', error);

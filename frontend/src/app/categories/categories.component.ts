@@ -13,6 +13,7 @@ export class CategoriesComponent {
   categories:Category[] = []
   error:boolean = false;
   errorMessage:string = ''
+  category:string = ""
   
   constructor(private categoryService: CategoriesService, private router: Router){
   
@@ -24,7 +25,6 @@ export class CategoriesComponent {
   async getCategories(){
     let response = await this.categoryService.geCategories();
   console.log(response);
-
   this.categories = response
 
   }

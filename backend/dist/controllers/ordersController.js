@@ -12,44 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateOrderToDelivered = exports.getOrders = exports.getMyOrders = exports.updateOrderToPaid = exports.getOrderById = exports.addOrderItems = void 0;
+exports.updateOrderToDelivered = exports.getOrders = exports.getMyOrders = exports.updateOrderToPaid = exports.getOrderById = exports.createOrder = void 0;
 const sqlConfig_1 = require("../config/sqlConfig");
 const mssql_1 = __importDefault(require("mssql"));
-const uuid_1 = require("uuid");
-const addOrderItems = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { product_id, user_id, shipping_address, first_name, last_name, phone_number, email_address, payment_method, payment_result_id, payment_result_status, payment_result_update_time, payment_result_email_address, tax_price, total_price, is_paid, paid_at } = req.body;
-        const pool = yield mssql_1.default.connect(sqlConfig_1.sqlConfig);
-        const order_id = (0, uuid_1.v4)();
-        const result = yield pool.request()
-            .input('product_id', mssql_1.default.VarChar, product_id)
-            .input('order_id', mssql_1.default.VarChar, order_id)
-            .input('user_id', mssql_1.default.VarChar, user_id)
-            .input('shipping_address', mssql_1.default.NVarChar, shipping_address)
-            .input('paymentMethod', mssql_1.default.VarChar, payment_method)
-            .input('first_name', mssql_1.default.VarChar, first_name)
-            .input('last_name', mssql_1.default.VarChar, last_name)
-            .input('phone_number', mssql_1.default.VarChar, phone_number)
-            .input('email_address', mssql_1.default.VarChar, email_address
-            .input('email_address', mssql_1.default.VarChar, email_address)
-            .input('payment_result_id', mssql_1.default.VarChar, payment_result_id)
-            .input('payment_result_status', mssql_1.default.VarChar, payment_result_status)
-            .input('payment_result_update_time', mssql_1.default.VarChar, payment_result_update_time)
-            .input('payment_result_email_address', mssql_1.default.VarChar, payment_result_email_address)
-            .input('tax_price', mssql_1.default.VarChar, tax_price)
-            .input('total_price', mssql_1.default.VarChar, total_price)
-            .input('is_paid', mssql_1.default.VarChar, is_paid)
-            .input('paid_at', mssql_1.default.VarChar, paid_at))
-            .execute('AddOrder');
-        const createdOrder = result.recordset[0];
-        res.status(201).json(createdOrder);
+        console.log(req.body);
     }
     catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-exports.addOrderItems = addOrderItems;
+exports.createOrder = createOrder;
 const getOrderById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const pool = yield mssql_1.default.connect(sqlConfig_1.sqlConfig);

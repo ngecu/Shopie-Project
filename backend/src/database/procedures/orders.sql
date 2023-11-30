@@ -1,38 +1,62 @@
 CREATE OR ALTER PROCEDURE AddOrder
-@order_id VARCHAR(500),
-    @product_id NVARCHAR(MAX),
-    @shippingAddress NVARCHAR(MAX),
-    @paymentMethod VARCHAR(50),
-    @itemsPrice DECIMAL(10, 2),
-    @taxPrice DECIMAL(10, 2),
+    @order_id VARCHAR(255),
+    @product_id VARCHAR(255),
+    @first_name VARCHAR(50),
+    @last_name VARCHAR(50),
+    @phone_number VARCHAR(20),
+    @email_address VARCHAR(100),
+    @cartItemsPrice DECIMAL(10, 2),
     @shippingPrice DECIMAL(10, 2),
+    @taxPrice DECIMAL(10, 2),
     @totalPrice DECIMAL(10, 2),
-    @user_id VARCHAR(500)
+    @shippingAddress VARCHAR(255),
+    @receipt VARCHAR(255),
+    @user_id VARCHAR(500),
+    @is_paid INT,
+    @paid_at VARCHAR(255),
+    @is_delivered INT,
+    @delivered_at VARCHAR(255),
+    @created_at VARCHAR(255)
 AS
 BEGIN
-
     INSERT INTO orders (
         order_id,
-		product_id,
+        product_id,
+        first_name,
+        last_name,
+        phone_number,
+        email_address,
+        cartItemsPrice,
+        shippingPrice,
+        taxPrice,
+        totalPrice,
+        shippingAddress,
+        receipt,
         user_id,
-        shipping_address,
-        payment_method,
-        tax_price,
-        shipping_price,
-        total_price
-        
+        is_paid,
+        paid_at,
+        is_delivered,
+        delivered_at,
+        created_at
     )
     VALUES (
-        @order_id, 
-		 @product_id,
-        @user_id,
-        @shippingAddress,
-        @paymentMethod,
-        @taxPrice,
+        @product_id,
+        @product_id,
+        @first_name,
+        @last_name,
+        @phone_number,
+        @email_address,
+        @cartItemsPrice,
         @shippingPrice,
-        @totalPrice
-      
+        @taxPrice,
+        @totalPrice,
+        @shippingAddress,
+        @receipt,
+        @user_id,
+        @is_paid,
+        @paid_at,
+        @is_delivered,
+        @delivered_at,
+        @created_at
     );
-
-   
 END;

@@ -32,7 +32,7 @@ const routes: Routes = [
   {path:'my-account/categories',component:CategoriesComponent},
   {path:'my-account/orders',component:OrdersComponent},
   {path:'category/:categoryId',component:CategoryComponent},
-  {path:'product/:id',component:ProductComponent},
+  {path:'product/:productId',component:ProductComponent},
   {path:'lost-password',component:LostPasswordComponent},
   {path:'add_category',component:AddCategoryComponent},
   {path:'add_product',component:AddProductComponent},

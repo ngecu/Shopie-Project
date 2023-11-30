@@ -10,4 +10,5 @@ product_router.post('/:id/reviews', verifyToken_1.verifyToken, productsControlle
 product_router.get('/:product_id', productsController_js_1.getProductById);
 product_router.delete("/:product_id", verifyToken_1.verifyToken, productsController_js_1.deleteProduct);
 product_router.put("/:product_id", verifyToken_1.verifyToken, productsController_js_1.updateProduct);
+product_router.get('/category/:category_id', productsController_js_1.getProductsByCategory);
 exports.default = product_router;

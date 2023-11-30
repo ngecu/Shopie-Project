@@ -9,6 +9,3 @@ BEGIN
   INSERT INTO categories (category_id,category_name, category_description,category_image)
   VALUES (@category_id,@category_name, @category_description,@category_image);
 END;
-
-
-SELECT * FROM Products

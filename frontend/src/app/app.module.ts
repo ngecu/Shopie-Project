@@ -23,6 +23,7 @@ import { AddCategoryComponent } from './add-category/add-category.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { CustomFilterPipePipe } from './custom-filter-pipe.pipe';
 import { MyaccountComponent } from './myaccount/myaccount.component';
 import { MyordersComponent } from './myorders/myorders.component';
 import { OrdersComponent } from './orders/orders.component';
@@ -57,6 +58,7 @@ import { UsersComponent } from './users/users.component';
     AddProductComponent,
     EditProductComponent,
     CheckoutComponent,
+    CustomFilterPipePipe,
   ],
   imports: [
     AppRoutingModule,

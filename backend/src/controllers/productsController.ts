@@ -6,7 +6,7 @@ import {v4} from 'uuid'
 export  const createProduct = async (req: Request, res: Response) => {
     try {
       const product_id = v4();
-      const {name,price,discount,image,category_id,countInStock,numReviews,description,tags} = req.body
+      const {name,price,discount,image,category_id,countInStock,numReviews,description} = req.body
       const pool = await mssql.connect(sqlConfig);
       const result = await pool.request()
       .input('product_id', mssql.VarChar, product_id)
@@ -14,7 +14,7 @@ export  const createProduct = async (req: Request, res: Response) => {
         .input('price', mssql.Decimal, price)
         .input('discount', mssql.Int, discount)
         .input('image', mssql.VarChar, image)
-      .input('tags', mssql.VarChar, tags)
+ 
 
         .input('category_id', mssql.VarChar, category_id)
         .input('countInStock', mssql.Int,countInStock)
@@ -22,8 +22,9 @@ export  const createProduct = async (req: Request, res: Response) => {
         .input('description', mssql.Text, description)
         .execute('InsertProduct');
   
-      const createdProduct = result.recordset[0];
-      res.status(201).json(createdProduct);
+        return res.status(200).json({
+          message: 'Product created successfully',
+      });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -173,5 +174,28 @@ export  const createProductReview = async (req: Request, res: Response) => {
     }
   };
   
+
+  export const getProductsByCategory = async (req: Request, res: Response) => {
+    try {
+      const { category_id } = req.params;
+  
+      const pool = await mssql.connect(sqlConfig);
+      const result = await pool
+        .request()
+        .input('category_id', mssql.VarChar(500), category_id)
+        .execute('GetProductsByCategory');
+  
+      const products = result.recordset;
+  
+      if (!products || products.length === 0) {
+        return res.status(404).json({ error: 'No products found for the given category' });
+      }
+  
+      res.status(200).json(products);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
   
   
