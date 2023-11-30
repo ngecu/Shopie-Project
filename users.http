@@ -69,3 +69,22 @@ token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNzYyNTNjZTQtMTI4My00
     
 
 }
+
+
+#### forgot password 
+post http://localhost:5000/user/forgot 
+Content-Type: application/json
+
+{
+"email":"dan@yopmail.com",
+"name":"dan Kitheka"
+}
+
+##### reset password 
+post http://localhost:5000/user/reset 
+Content-Type: application/json
+
+{
+"user_id" : "466782fb-fea3-4d1a-9980-9c150105962e",
+ "password" : "@Qwerty123"
+}

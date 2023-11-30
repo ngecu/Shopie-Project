@@ -6,7 +6,6 @@ CREATE TABLE products (
     name VARCHAR(255),
     price DECIMAL(18, 2),
     discount INT,
-    tags VARCHAR(255),
     image VARCHAR(255),
     category_id VARCHAR(500),
     countInStock INT,

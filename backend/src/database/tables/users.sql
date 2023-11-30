@@ -9,5 +9,6 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     role INT NOT NULL DEFAULT 0,
     welcomed INT Default 0,
-    active INT Default 1
+    active INT Default 1,
+    resetPassword BIT
 );
