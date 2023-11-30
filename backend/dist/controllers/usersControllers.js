@@ -30,27 +30,19 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const sqlConfig_1 = require("../config/sqlConfig");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dbhelpers_1 = __importDefault(require("../dbhelpers/dbhelpers"));
+const validators_1 = require("../validators/validators");
 exports.dbhelper = new dbhelpers_1.default;
 const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.body);
     try {
         const { name, email, password } = req.body;
-        if (!name || !email || !password) {
-            return res.status(400).json({
-                message: 'Please provide all required fields: name, email, phone_number, password',
-            });
+        const { error } = validators_1.registerUserSchema.validate(req.body);
+        if (error) {
+            return res.status(400).json({ error: error.details[0].message });
         }
         const user_id = (0, uuid_1.v4)();
         const hashedPwd = yield bcrypt_1.default.hash(password, 5);
         const pool = yield mssql_1.default.connect(sqlConfig_1.sqlConfig);
-        const emailTaken = yield pool.request()
-            .input('email', mssql_1.default.VarChar, email)
-            .query('SELECT * FROM users WHERE email = @email');
-        if (emailTaken.recordset.length > 0) {
-            return res.status(400).json({
-                error: 'This email is already in use',
-            });
-        }
         const result = yield pool.request()
             .input('user_id', mssql_1.default.VarChar, user_id)
             .input('name', mssql_1.default.VarChar, name)
@@ -70,7 +62,7 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.registerUser = registerUser;
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b, _c, _d;
+    var _a, _b, _c;
     try {
         const { email, password } = req.body;
         const pool = yield mssql_1.default.connect(sqlConfig_1.sqlConfig);
@@ -94,7 +86,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             const token = jsonwebtoken_1.default.sign(LoginCredentials[0], process.env.SECRET);
             console.log(token);
             return res.status(200).json({
-                message: "Logged in successfully", token, name: (_d = user[0]) === null || _d === void 0 ? void 0 : _d.name
+                message: "Logged in successfully", token
             });
         }
         else {

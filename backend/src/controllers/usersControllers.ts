@@ -19,26 +19,18 @@ export const registerUser = async (req:Request, res:Response) => {
         const { name, email, password } = req.body;
 
         
-        if (!name || !email  || !password) {
-            return res.status(400).json({
-                message: 'Please provide all required fields: name, email, phone_number, password',
-            });
-        }
+    const { error } = registerUserSchema.validate(req.body);
 
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
+    }
+
+        
         const user_id = v4();
         const hashedPwd = await bcrypt.hash(password, 5);
         const pool = await mssql.connect(sqlConfig);
 
-        const emailTaken = await pool.request()
-            .input('email', mssql.VarChar, email)
-            .query('SELECT * FROM users WHERE email = @email');
-
-
-        if (emailTaken.recordset.length > 0) {
-            return res.status(400).json({
-                error: 'This email is already in use',
-            });
-        }
+      
 
 
         const result = await pool.request()
@@ -92,7 +84,7 @@ export const loginUser = async(req: Request, res: Response) => {
             console.log(token);
             
             return res.status(200).json({
-                message: "Logged in successfully", token,name:user[0]?.name
+                message: "Logged in successfully", token
             });
         } else {
             return res.json({

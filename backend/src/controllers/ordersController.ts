@@ -3,16 +3,68 @@ import { Request, Response } from 'express'
 import mssql from 'mssql'
 import {v4} from'uuid';
 
-export const createOrder = async (req: Request, res: Response) => {
+
+
+  export const createOrder = async (req:Request, res:Response) => {
+    console.log(req.body);
     try {
-      console.log(req.body);
-    
-      
+      const {
+        product_id,
+        first_name,
+        last_name,
+        phone_number,
+        email_address,
+        cartItemsPrice,
+        shippingPrice,
+        taxPrice,
+        totalPrice,
+        shippingAddress,
+        receipt,
+        user_id,
+        is_paid,
+        paid_at,
+        is_delivered,
+        delivered_at,
+        created_at,
+      } = req.body;
+        
+  
+
+        const pool = await mssql.connect(sqlConfig);
+        const order_id = v4()
+
+        const result = await pool.request()
+        .input('order_id', mssql.VarChar, order_id) // Assuming order_id is generated using uuid
+        .input('product_id', mssql.VarChar, product_id)
+        .input('first_name', mssql.VarChar, first_name)
+        .input('last_name', mssql.VarChar, last_name)
+        .input('phone_number', mssql.VarChar, phone_number)
+        .input('email_address', mssql.VarChar, email_address)
+        .input('cartItemsPrice', mssql.Decimal(10, 2), cartItemsPrice)
+        .input('shippingPrice', mssql.Decimal(10, 2), shippingPrice)
+        .input('taxPrice', mssql.Decimal(10, 2), taxPrice)
+        .input('totalPrice', mssql.Decimal(10, 2), totalPrice)
+        .input('shippingAddress', mssql.VarChar, shippingAddress)
+        .input('receipt', mssql.VarChar, receipt)
+        .input('user_id', mssql.VarChar, user_id)
+        .input('is_paid', mssql.Int, is_paid)
+        .input('paid_at', mssql.VarChar, paid_at)
+        .input('is_delivered', mssql.Int, is_delivered)
+        .input('delivered_at', mssql.VarChar, delivered_at)
+        .input('created_at', mssql.VarChar, created_at)
+        .execute('AddOrder')
+        
+        return res.status(201).json({
+            message: 'Order Created successfully',
+        });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
+        console.error(error);
+        return res.status(500).json({
+            error: 'Internal Server Error',
+        });
     }
-  };
+};
+
   
 export  const getOrderById = async (req: Request, res: Response) => {
     try {

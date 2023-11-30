@@ -54,7 +54,7 @@ describe("Create product test", () => {
         mockedV4.mockImplementation(() => "uniqueid_dskjfgkjhf_dfkjgsj");
         console.log((0, uuid_1.v4)());
         expect(res.json).toHaveBeenCalledWith({
-            message: "product created successfully"
+            message: "Product created successfully"
         });
         expect(res.status).toHaveBeenCalledWith(200);
     }));

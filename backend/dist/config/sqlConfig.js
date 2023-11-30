@@ -28,7 +28,7 @@ exports.sqlConfig = {
         idleTimeoutMillis: 30000,
     },
     options: {
-        encrypt: false,
+        encrypt: false, // for azure
         trustServerCertificate: true, // change to true for local dev / self-signed certs
     },
 };

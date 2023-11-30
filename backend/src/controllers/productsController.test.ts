@@ -61,7 +61,7 @@ describe("Create product test",()=>{
    
         
   expect(res.json).toHaveBeenCalledWith({
-    message: "product created successfully"
+    message: "Product created successfully"
   });
     expect(res.status).toHaveBeenCalledWith(200);
 
