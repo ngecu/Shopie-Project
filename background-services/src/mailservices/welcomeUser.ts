@@ -8,16 +8,16 @@ dotenv.config()
 export const welcomeUser = async() =>{
     const pool = await mssql.connect(sqlConfig)
 
-    const employees = await (await pool.request().query('SELECT * FROM Employees WHERE welcomed = 0')).recordset
+    const users = await (await pool.request().query('SELECT * FROM users WHERE welcomed = 0')).recordset
 
-    console.log(employees);
+    console.log(users);
     
 
-    for (let employee of employees){
-        ejs.renderFile('templates/welcomeUser.ejs', {Name: employee.name}, async(error, data)=>{
+    for (let user of users){
+        ejs.renderFile('templates/welcomeUser.ejs', {Name: user.name}, async(error, data)=>{
             let mailOptions = {
                 from: process.env.EMAIL as string,
-                to: employee.email,
+                to: user.email,
                 subject: "Welcome Onboard",
                 html: data
             }
@@ -25,7 +25,7 @@ export const welcomeUser = async() =>{
             try {
                 await sendMail(mailOptions)
 
-                await pool.request().query('UPDATE Employees SET welcomed = 1 WHERE welcomed = 0')
+                await pool.request().query('UPDATE users SET welcomed = 1 WHERE welcomed = 0')
 
                 console.log('Emails send to new users');
                 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Product } from '../interfaces/product';
 import { OrdersService } from '../services/orders.service';
 
@@ -17,6 +18,7 @@ export class CheckoutComponent {
   totalPrice:number = 0;
   shipping_address:string =  ""
   user_id:string = ""
+  created_at:string = " ";
   cartItems: Product[] = [];
 
   public lat:any;
@@ -56,7 +58,7 @@ export class CheckoutComponent {
   }
 
 
-  constructor(private fb: FormBuilder,private ordersServices:OrdersService) {
+  constructor(private router: Router,private fb: FormBuilder,private ordersServices:OrdersService) {
     this.userForm = this.fb.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
@@ -116,6 +118,11 @@ export class CheckoutComponent {
   async submitForm() {
     console.log("this form is ", this.userForm);
   
+    const currentDatetime = new Date();
+const currentTimeString = currentDatetime.toISOString();
+
+
+
     // Check if any form field is empty
     if (
       !this.userForm.value.first_name ||
@@ -141,7 +148,9 @@ export class CheckoutComponent {
       shippingAddress: this.shipping_address,
       cartItems:this.cartItems,
       receipt:this.generateReceiptNumber(),
-      user_id: this.user_id 
+      user_id: this.user_id ,
+      created_at:currentTimeString,
+      is_paid:false
     };
   
     console.log("sdfghjk", formData);
@@ -150,6 +159,13 @@ export class CheckoutComponent {
    const response = await this.ordersServices.addOrderItems(formData)
 
    console.log(response);
+
+   if(response.message){
+    alert(response.message)
+    this.router.navigate(['login']);
+    localStorage.clear();
+    console.log(localStorage.getItem('token'));
+   }
    
     
     // Stringify the object and store in localStorage

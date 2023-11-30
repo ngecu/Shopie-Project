@@ -19,30 +19,33 @@ const uuid_1 = require("uuid");
 const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.body);
     try {
-        const { product_id, first_name, last_name, phone_number, email_address, cartItemsPrice, shippingPrice, taxPrice, totalPrice, shippingAddress, receipt, user_id, is_paid, paid_at, is_delivered, delivered_at, created_at, } = req.body;
+        const { product_id, first_name, last_name, phone_number, email_address, cartItemsPrice, shippingPrice, taxPrice, totalPrice, shippingAddress, receipt, user_id, is_paid, paid_at, is_delivered, delivered_at, created_at, cartItems } = req.body;
         const pool = yield mssql_1.default.connect(sqlConfig_1.sqlConfig);
         const order_id = (0, uuid_1.v4)();
-        const result = yield pool.request()
-            .input('order_id', mssql_1.default.VarChar, order_id) // Assuming order_id is generated using uuid
-            .input('product_id', mssql_1.default.VarChar, product_id)
-            .input('first_name', mssql_1.default.VarChar, first_name)
-            .input('last_name', mssql_1.default.VarChar, last_name)
-            .input('phone_number', mssql_1.default.VarChar, phone_number)
-            .input('email_address', mssql_1.default.VarChar, email_address)
-            .input('cartItemsPrice', mssql_1.default.Decimal(10, 2), cartItemsPrice)
-            .input('shippingPrice', mssql_1.default.Decimal(10, 2), shippingPrice)
-            .input('taxPrice', mssql_1.default.Decimal(10, 2), taxPrice)
-            .input('totalPrice', mssql_1.default.Decimal(10, 2), totalPrice)
-            .input('shippingAddress', mssql_1.default.VarChar, shippingAddress)
-            .input('receipt', mssql_1.default.VarChar, receipt)
-            .input('user_id', mssql_1.default.VarChar, user_id)
-            .input('is_paid', mssql_1.default.Int, is_paid)
-            .input('paid_at', mssql_1.default.VarChar, paid_at)
-            .input('is_delivered', mssql_1.default.Int, is_delivered)
-            .input('delivered_at', mssql_1.default.VarChar, delivered_at)
-            .input('created_at', mssql_1.default.VarChar, created_at)
-            .execute('AddOrder');
-        return res.status(201).json({
+        cartItems.forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
+            console.log(order_id);
+            const result = pool.request()
+                .input('order_id', mssql_1.default.VarChar, order_id)
+                .input('product_id', mssql_1.default.VarChar, item.product_id)
+                .input('first_name', mssql_1.default.VarChar, first_name)
+                .input('last_name', mssql_1.default.VarChar, last_name)
+                .input('phone_number', mssql_1.default.VarChar, phone_number)
+                .input('email_address', mssql_1.default.VarChar, email_address)
+                .input('cartItemsPrice', mssql_1.default.Decimal(10, 2), ((item.price - item.discount) * item.qty))
+                .input('shippingPrice', mssql_1.default.Decimal(10, 2), shippingPrice)
+                .input('taxPrice', mssql_1.default.Decimal(10, 2), taxPrice)
+                .input('totalPrice', mssql_1.default.Decimal(10, 2), totalPrice)
+                .input('shippingAddress', mssql_1.default.VarChar, shippingAddress)
+                .input('receipt', mssql_1.default.VarChar, receipt)
+                .input('user_id', mssql_1.default.VarChar, user_id)
+                .input('is_paid', mssql_1.default.Int, is_paid)
+                .input('paid_at', mssql_1.default.VarChar, paid_at)
+                .input('is_delivered', mssql_1.default.Int, is_delivered)
+                .input('delivered_at', mssql_1.default.VarChar, delivered_at)
+                .input('created_at', mssql_1.default.VarChar, created_at)
+                .execute('AddOrder');
+        }));
+        return res.status(200).json({
             message: 'Order Created successfully',
         });
     }

@@ -36,4 +36,26 @@ export class ProductComponent {
     // Set other product details similarly
   }
 
+  addToCart(product: Product) {
+    const storedCartItems = localStorage.getItem('cartItems');
+    let cartItems: Product[] = storedCartItems ? JSON.parse(storedCartItems) : [];
+  
+    // Check if the product is already in the cart
+    const existingProduct = cartItems.find(item => item.product_id === product.product_id);
+  
+    if (existingProduct) {
+      // If the product is already in the cart, increment the quantity
+      existingProduct.qty = (existingProduct.qty || 1) + 1;
+    } else {
+      // If the product is not in the cart, add it with a quantity of 1
+      product.qty = 1;
+      cartItems.push(product);
+    }
+  
+    // Update the cartItems in localStorage
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  
+    console.log("Cart items:", cartItems);
+  }
+
 }

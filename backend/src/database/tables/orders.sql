@@ -1,6 +1,7 @@
 CREATE TABLE orders (
     order_id VARCHAR(36) PRIMARY KEY,
     product_id VARCHAR(255) ,
+    
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     phone_number VARCHAR(20) NOT NULL,

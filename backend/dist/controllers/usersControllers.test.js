@@ -54,7 +54,7 @@ describe("User Registration", () => {
     it("failed to register", () => __awaiter(void 0, void 0, void 0, function* () {
         const req = {
             body: {
-                // userName: "Robin",
+                // name: "Robin",
                 email: "devngecu@gmail.com",
                 password: "I@mrich24",
             },
@@ -74,7 +74,7 @@ describe("User Registration", () => {
         jest.spyOn(mssql_1.default, "connect").mockResolvedValue(mockedPool);
         yield (0, usersControllers_1.registerUser)(req, res);
         expect(res.json).toHaveBeenCalledWith({
-            error: '"userName" is required',
+            error: '"name" is required',
         });
         expect(res.status).toHaveBeenCalledWith(400);
     }));

@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   searchForm: FormGroup;
   loggedInTrue = localStorage.getItem('loggedIn');
   name = localStorage.getItem('name');
-  role = Number(localStorage.getItem('role')) ;
+  role:number = 0 ;
   cartItems: Product[] = [];
   searchText=""
 
@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
   total_items : Number  = 0
 
   constructor(private fb: FormBuilder, private router: Router) {
-    
+    this.check()
     this.searchForm = this.fb.group({
       searchTerm: [''] 
       
@@ -86,5 +86,14 @@ export class NavbarComponent implements OnInit {
   date = new Date();
 
 
+  
+  async check(){
+    const userDetails = localStorage.getItem('user_details');
+    this.role = userDetails ? JSON.parse(userDetails).role : 0;
+
+
+    console.log(this.role);
+    
+  }
   
 }

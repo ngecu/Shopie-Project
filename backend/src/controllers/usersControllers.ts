@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt'
 import { sqlConfig } from '../config/sqlConfig'
 import jwt from 'jsonwebtoken'
 import Connection from '../dbhelpers/dbhelpers'
-import { registerUserSchema } from '../validators/validators'
+import { registerUserSchema, userLoginValidationSchema } from '../validators/validators'
 import { isEmpty } from 'lodash'
 import { ExtendedUser } from '../middlewares/verifyToken'
 
@@ -40,7 +40,7 @@ export const registerUser = async (req:Request, res:Response) => {
         .input('password', mssql.VarChar, hashedPwd)
         .execute('InsertUser');
         
-        return res.status(201).json({
+        return res.status(200).json({
             message: 'User registered successfully',
         });
     } catch (error) {
@@ -54,6 +54,13 @@ export const registerUser = async (req:Request, res:Response) => {
 export const loginUser = async(req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
+
+
+        const { error } = userLoginValidationSchema.validate(req.body);
+
+        if (error) {
+          return res.status(400).json({ error: error.details[0].message });
+        }
 
         const pool = await mssql.connect(sqlConfig);
 

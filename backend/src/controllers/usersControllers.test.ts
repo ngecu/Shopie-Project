@@ -54,7 +54,7 @@ describe("User Registration", () => {
     it("failed to register", async () => {
     const req = {
       body: {
-        // userName: "Robin",
+        // name: "Robin",
         email: "devngecu@gmail.com",
         password: "I@mrich24",
       },
@@ -82,7 +82,7 @@ describe("User Registration", () => {
     await registerUser(req as Request, res as never);
 
         expect(res.json).toHaveBeenCalledWith({
-          error: '"userName" is required',
+          error: '"name" is required',
         });
         expect(res.status).toHaveBeenCalledWith(400)
   });

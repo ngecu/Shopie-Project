@@ -26,21 +26,27 @@ import {v4} from'uuid';
         is_delivered,
         delivered_at,
         created_at,
+        cartItems
       } = req.body;
         
+
   
 
         const pool = await mssql.connect(sqlConfig);
         const order_id = v4()
+        cartItems.forEach(async (item:any) => {
+        
+        console.log(order_id);
+        
 
-        const result = await pool.request()
-        .input('order_id', mssql.VarChar, order_id) // Assuming order_id is generated using uuid
-        .input('product_id', mssql.VarChar, product_id)
+        const result = pool.request()
+        .input('order_id', mssql.VarChar, order_id) 
+        .input('product_id', mssql.VarChar, item.product_id)
         .input('first_name', mssql.VarChar, first_name)
         .input('last_name', mssql.VarChar, last_name)
         .input('phone_number', mssql.VarChar, phone_number)
         .input('email_address', mssql.VarChar, email_address)
-        .input('cartItemsPrice', mssql.Decimal(10, 2), cartItemsPrice)
+        .input('cartItemsPrice', mssql.Decimal(10, 2), ((item.price - item.discount) * item.qty)  )
         .input('shippingPrice', mssql.Decimal(10, 2), shippingPrice)
         .input('taxPrice', mssql.Decimal(10, 2), taxPrice)
         .input('totalPrice', mssql.Decimal(10, 2), totalPrice)
@@ -54,9 +60,13 @@ import {v4} from'uuid';
         .input('created_at', mssql.VarChar, created_at)
         .execute('AddOrder')
         
-        return res.status(201).json({
-            message: 'Order Created successfully',
+      
         });
+
+        return res.status(200).json({
+          message: 'Order Created successfully',
+      });
+        
     } catch (error) {
         console.error(error);
         return res.status(500).json({

@@ -49,7 +49,7 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             .input('email', mssql_1.default.VarChar, email)
             .input('password', mssql_1.default.VarChar, hashedPwd)
             .execute('InsertUser');
-        return res.status(201).json({
+        return res.status(200).json({
             message: 'User registered successfully',
         });
     }
@@ -65,6 +65,10 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
     try {
         const { email, password } = req.body;
+        const { error } = validators_1.userLoginValidationSchema.validate(req.body);
+        if (error) {
+            return res.status(400).json({ error: error.details[0].message });
+        }
         const pool = yield mssql_1.default.connect(sqlConfig_1.sqlConfig);
         let user = yield (yield pool.request().input("email", email).input("password", password).execute('loginUser')).recordset;
         if (((_a = user[0]) === null || _a === void 0 ? void 0 : _a.email) == email) {
