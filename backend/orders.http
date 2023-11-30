@@ -26,3 +26,13 @@ Content-Type: application/json
 
 
 }
+
+###
+GET http://localhost:5000/order/myorders/4bba2c63-9b72-4603-b0bf-7938f0c572c9 
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNGJiYTJjNjMtOWI3Mi00NjAzLWIwYmYtNzkzOGYwYzU3MmM5IiwibmFtZSI6Ik1lcmN5IFdhbWJ1aSIsImVtYWlsIjoia2FiYnpkakBnbWFpbC5jb20iLCJyb2xlIjowLCJ3ZWxjb21lZCI6MSwiYWN0aXZlIjoxLCJpYXQiOjE3MDEzNDI1MzF9.AinkiCNUXdSjjoDcDOqD6SngQQ8ejApslcyq0Ikbz_I
+
+{
+    "user_id":"4bba2c63-9b72-4603-b0bf-7938f0c572c9"
+}
+

@@ -53,6 +53,8 @@ export class AddCategoryComponent {
              setTimeout( async() => {     
               this.success = false
               this.successMessage = ""
+
+              alert("Category Registered successfully,you can add another or go back to categories")
         
             this.router.navigate(['/my-account/categories'])
           }, 2000);

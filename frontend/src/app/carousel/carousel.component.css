@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Set a height for centering vertically */
+    /* height: 100vh; */
   }
   
   .flex-container {

@@ -122,7 +122,10 @@ export  const updateOrderToPaid = async (req: Request, res: Response) => {
   
 export  const getMyOrders = async (req: Request, res: Response) => {
     try {
-      const {user_id} = req.body
+      console.log(req.params);
+      
+      const {user_id} = req.params
+
       const pool = await mssql.connect(sqlConfig);
       const result = await pool.request()
         .input('user_id', mssql.VarChar, user_id)

@@ -29,7 +29,8 @@ describe("User Registration", () => {
             body: {
                 name: "Robin",
                 email: "devngecu@gmail.com",
-                password: "I@mrich24"
+                password: "I@mrich24",
+                confirm_password: "I@mrich24"
             },
         };
         jest
@@ -57,6 +58,7 @@ describe("User Registration", () => {
                 // name: "Robin",
                 email: "devngecu@gmail.com",
                 password: "I@mrich24",
+                confirm_password: "I@mrich24"
             },
         };
         jest
@@ -74,7 +76,7 @@ describe("User Registration", () => {
         jest.spyOn(mssql_1.default, "connect").mockResolvedValue(mockedPool);
         yield (0, usersControllers_1.registerUser)(req, res);
         expect(res.json).toHaveBeenCalledWith({
-            error: '"name" is required',
+            error: "\"name\" is required"
         });
         expect(res.status).toHaveBeenCalledWith(400);
     }));

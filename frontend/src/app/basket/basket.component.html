@@ -56,8 +56,14 @@
         </td>
         <td class="px-6 py-4 whitespace-nowrap">{{ item.qty }}</td>
         <td class="px-6 py-4 whitespace-nowrap">
-            <button (click)="removeFromCart(item)" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-red-400">
-              Remove
+
+          <button (click)="removeFromCart(item)" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-red-400">
+            Remove
+          </button>
+        </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <button (click)="addToCart(item)" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-red-400">
+              add
             </button>
           </td>
           
@@ -70,16 +76,16 @@
 
     <div class="flex-6 ">
         <div class="bg-white border rounded p-4 shadow-md">
-            <h2 class="text-xl font-bold">SUBTOTAL({{total_items}}) ITEMS</h2>
+            <h2 class="text-xl font-bold">TOTAL({{total_items}}) ITEMS</h2>
             <hr/>
             <p>Ksh.{{subtotal}}</p>
             <hr/>
             <button
-            class="bg-blue-500 text-white py-4 px-6 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:border-blue-300"
+            class="W-100 bg-blue-500 text-white py-4 px-6 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:border-blue-300"
             [routerLink]="['/checkout']"
             [disabled]="button_disabled"
           >
-            PROCEED TO CHECKOUT
+            PROCEED
           </button>
           
 

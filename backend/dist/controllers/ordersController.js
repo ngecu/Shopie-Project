@@ -103,7 +103,8 @@ const updateOrderToPaid = (req, res) => __awaiter(void 0, void 0, void 0, functi
 exports.updateOrderToPaid = updateOrderToPaid;
 const getMyOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { user_id } = req.body;
+        console.log(req.params);
+        const { user_id } = req.params;
         const pool = yield mssql_1.default.connect(sqlConfig_1.sqlConfig);
         const result = yield pool.request()
             .input('user_id', mssql_1.default.VarChar, user_id)

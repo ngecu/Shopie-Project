@@ -37,20 +37,31 @@ export class OrdersService {
     return data;
   }
 
-  async getMyOrders(){
-    let token = localStorage.getItem('token') as string
-
-    const url = `${this.baseUrl}/myorders`;
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'token':token
-            },
-    });
-
-    const data = await response.json();
-    return data;
+  async getMyOrders(user_id: string) {
+    try {
+      let token = localStorage.getItem('token') as string;
+  
+      const url = `${this.baseUrl}/myorders/${user_id}`;
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'token': token,
+          'Content-Type': 'application/json', // Add this line if needed
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+      throw new Error('Failed to fetch orders');
+    }
   }
+  
 
   async getOrderById(orderId: string) {
     let token = localStorage.getItem('token') as string
