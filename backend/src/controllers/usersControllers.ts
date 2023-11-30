@@ -1,13 +1,15 @@
 import { Request, Response } from 'express'
-import mssql from 'mssql'
+import mssql, { VarChar } from 'mssql'
 import {v4} from 'uuid'
 import bcrypt from 'bcrypt'
 import { sqlConfig } from '../config/sqlConfig'
 import jwt from 'jsonwebtoken'
 import Connection from '../dbhelpers/dbhelpers'
-import { registerUserSchema } from '../validators/validators'
+import { registerUserSchema , } from '../validators/validators'
 import { isEmpty } from 'lodash'
 import { ExtendedUser } from '../middlewares/verifyToken'
+import { validateResetpassword, validateUserEmail, } from "../validators/user-validators";
+import { config } from 'dotenv'
 
 export const dbhelper = new Connection
  
@@ -307,3 +309,4 @@ export const deleteUser = async (req: ExtendedUser, res: Response) => {
   };
 
 
+  

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BasketComponent } from './basket/basket.component';
+//import { BasketComponent } from './basket/basket.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AppRoutingModule } from './app-routing.module';

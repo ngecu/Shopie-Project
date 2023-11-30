@@ -3,10 +3,11 @@ CREATE OR ALTER PROCEDURE InsertUser
     @name VARCHAR(100),
     @email VARCHAR(100),
     @password VARCHAR(100)
+    @resetPassword BIT
 AS
 BEGIN
     INSERT INTO users (user_id, name, email,  password)
-    VALUES (@user_id, @name, @email,  @password);
+    VALUES (@user_id, @resetPassword, @name, @email,  @password);
 END;
 
 

@@ -7,8 +7,6 @@ token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZGU4MWUwMzktZWIwNy00N
 {
     "name": "Sample name2",
     "price": 200,
-    "discount": 3,
-    "tags":"food,fastfood",
     "image": "/images/sample2.jpg",
     "category_id": "e7157789-4b30-4a64-a1d7-0e1137423883",
     "countInStock": 10,
